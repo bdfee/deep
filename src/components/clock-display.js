@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 
 const ClockDisplay = (props) => {
-  return <div>{props.currentTime.toLocaleString()}</div>
+  return <div>{props.currentTimeObj.toLocaleString()}</div>
 }
 
 export default ClockDisplay
 
 ClockDisplay.propTypes = {
-  currentTime: PropTypes.object
+  currentTimeObj: PropTypes.object
 }
