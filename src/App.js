@@ -11,15 +11,15 @@ function App() {
   const noiseBank = [
     {
       type: 'pink-noise',
-      volume: 0.7
+      volume: 0.03
     },
     {
       type: 'pink-economy',
-      volume: 0.8
+      volume: 0.03
     },
     {
       type: 'white-noise',
-      volume: 0.3
+      volume: 0.01
     }
   ]
 

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
 
 const Stopwatch = () => {
   const [isActive, setIsActive] = useState(false)
@@ -43,7 +42,7 @@ const Stopwatch = () => {
   // TODO start stop one button
   return (
     <div style={style}>
-      Stopwatch
+      stopwatch
       <div>{displayTime.length ? displayTime : ''}</div>
       <button onClick={handleStartTime}>start</button>
       <button onClick={handleStopTime}>stop</button>
@@ -54,7 +53,3 @@ const Stopwatch = () => {
 }
 
 export default Stopwatch
-
-Stopwatch.propTypes = {
-  currentTimeObj: PropTypes.object
-}

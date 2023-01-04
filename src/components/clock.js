@@ -4,7 +4,6 @@ import Stopwatch from './stopwatch'
 
 const Clock = () => {
   const [currentTimeObj, setCurrentTimeObj] = useState(new Date())
-
   const refreshClock = () => setCurrentTimeObj(new Date())
 
   useEffect(() => {
