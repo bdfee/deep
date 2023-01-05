@@ -12,14 +12,6 @@ function App() {
     {
       type: 'pink-noise',
       volume: 0.7
-    },
-    {
-      type: 'pink-economy',
-      volume: 0.8
-    },
-    {
-      type: 'white-noise',
-      volume: 0.3
     }
   ]
 

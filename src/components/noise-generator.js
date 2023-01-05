@@ -6,12 +6,6 @@ const noiseGenerator = (function () {
     const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate)
     const output = noiseBuffer.getChannelData(0) // float32 of 88200
 
-    if (noise.type === 'white-noise') {
-      for (let i = 0; i < bufferSize; i++) {
-        output[i] = Math.random() * 2 - 1
-      }
-    }
-
     if (noise.type === 'pink-noise') {
       let b0 = 0
       let b1 = 0
@@ -32,21 +26,6 @@ const noiseGenerator = (function () {
         output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362
         output[i] *= 0.11
         b6 = white * 0.115926
-      }
-    }
-
-    if (noise.type === 'pink-economy') {
-      let b0 = 0
-      let b1 = 0
-      let b2 = 0
-
-      for (let i = 0; i < bufferSize; i++) {
-        const white = Math.random() * 2 - 1
-        b0 = 0.99765 * b0 + white * 0.099046
-        b1 = 0.963 * b1 + white * 0.2965164
-        b2 = 0.57 * b2 + white * 1.0526913
-        output[i] = b0 + b1 + b2 + white * 0.1848
-        output[i] *= 0.11
       }
     }
 

@@ -1,9 +1,13 @@
 import noiseGenerator from './noise-generator'
 
 const NoiseControl = (props) => {
+  const style = {
+    border: '1px solid'
+  }
+
   return props.noises.map((noise) => {
     return (
-      <div key={`${noise.type}_control`}>
+      <div key={`${noise.type}_control`} style={style}>
         {noise.type}
         <button
           key={`${noise.type}_play`}
