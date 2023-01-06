@@ -1,6 +1,8 @@
 const noiseGenerator = (function () {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
+  // TODO trim down to just pink noise and give user control over bands
+
   const createNoise = (noise) => {
     const bufferSize = 2 * audioContext.sampleRate
     const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate)

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import ClockDisplay from './clock-display'
-import Stopwatch from './stopwatch'
 
 const Clock = () => {
   const [currentTimeObj, setCurrentTimeObj] = useState(new Date())
@@ -13,7 +12,6 @@ const Clock = () => {
   return (
     <div>
       <ClockDisplay currentTimeObj={currentTimeObj} />
-      <Stopwatch currentTimeObj={currentTimeObj} />
     </div>
   )
 }

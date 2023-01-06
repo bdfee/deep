@@ -1,32 +1,11 @@
-import { useState, useEffect } from 'react'
-import NoiseControl from './components/noise-control'
+import Tracker from './components/tracker'
 import Clock from './components/clock'
 
 function App() {
-  const [noises, setNoises] = useState([])
-  useEffect(() => {
-    setNoises(noiseBank)
-  }, [])
-
-  const noiseBank = [
-    {
-      type: 'pink-noise',
-      volume: 0.03
-    },
-    {
-      type: 'pink-economy',
-      volume: 0.03
-    },
-    {
-      type: 'white-noise',
-      volume: 0.01
-    }
-  ]
-
   return (
     <div className="App">
       <Clock />
-      <NoiseControl noises={noises} />
+      <Tracker />
     </div>
   )
 }
