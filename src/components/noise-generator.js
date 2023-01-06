@@ -2,6 +2,7 @@ const noiseGenerator = (function () {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
   const createNoise = (noise) => {
+    // TODO pass in noise params
     // buffersize equals 2 times the sample rate
     const bufferSize = 2 * audioContext.sampleRate
     // console.log('bufferSize', bufferSize) // 88200 which is 2x the sample rate aka 2 seconds
@@ -62,9 +63,15 @@ const noiseGenerator = (function () {
     noise.audioSource.start()
   }
 
+  const adjustGain = (noise, volume) => {
+    console.log(noise)
+    noise.gainNode.gain.setTargetAtTime(volume, audioContext.currentTime + 0.5, 0.5)
+  }
+
   return {
     play: playNoise,
-    stop: stopNoise
+    stop: stopNoise,
+    volume: adjustGain
   }
 })()
 
