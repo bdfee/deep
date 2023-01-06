@@ -64,8 +64,7 @@ const noiseGenerator = (function () {
   }
 
   const adjustGain = (noise, volume) => {
-    console.log(noise)
-    noise.gainNode.gain.setTargetAtTime(volume, audioContext.currentTime + 0.5, 0.5)
+    noise.gainNode.gain.setTargetAtTime(volume, audioContext.currentTime + 1, 0.5)
   }
 
   return {
