@@ -5,11 +5,14 @@ const PinkNoise = () => {
   const audioContext = useAudioContext()
 
   const [gain, setGain] = useState(0.3)
+  const [highPassFrequency, setHighPassFrequency] = useState(20)
+  const [lowPassFrequency, setLowPassFrequency] = useState(12000)
   const [isActive, setIsActive] = useState(false)
+
   const noise = useRef({})
 
   const generateAudioBuffer = (noise) => {
-    const bufferSize = 2 * audioContext.sampleRate
+    const bufferSize = 5 * audioContext.sampleRate
     const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate)
     const output = buffer.getChannelData(0)
 
@@ -40,25 +43,33 @@ const PinkNoise = () => {
   const createAudioNodes = (noise) => {
     noise.audioSource = audioContext.createBufferSource()
     noise.gainNode = audioContext.createGain()
+    noise.lowPassFilter = audioContext.createBiquadFilter()
+    noise.highPassFilter = audioContext.createBiquadFilter()
   }
 
   const setAudioNodeParams = (noise) => {
     noise.gainNode.gain.value = gain
     noise.audioSource.loop = true
+    noise.lowPassFilter.type = 'lowpass'
+    noise.lowPassFilter.frequency.value = lowPassFrequency
+    noise.highPassFilter.type = 'highpass'
+    noise.highPassFilter.frequency.value = highPassFrequency
   }
 
   const connectAudioNodes = (noise) => {
     noise.audioSource.connect(noise.gainNode)
-    noise.gainNode.connect(audioContext.destination)
+    noise.gainNode.connect(noise.lowPassFilter)
+    noise.lowPassFilter.connect(noise.highPassFilter)
+    noise.highPassFilter.connect(audioContext.destination)
   }
 
   const play = (noise) => {
-    console.log(noise)
     createAudioNodes(noise)
     generateAudioBuffer(noise)
     setAudioNodeParams(noise)
     connectAudioNodes(noise)
     noise.audioSource.start()
+    console.log(noise.audioSource)
     setIsActive(true)
   }
 
@@ -67,9 +78,19 @@ const PinkNoise = () => {
     setIsActive(false)
   }
 
-  const volume = (noise, e) => {
+  const handleGain = (noise, e) => {
     setGain(e.target.value)
     noise.gainNode.gain.linearRampToValueAtTime(e.target.value, audioContext.currentTime + 0.01)
+  }
+
+  const handleHighPass = (noise, e) => {
+    setHighPassFrequency(e.target.value)
+    noise.highPassFilter.frequency.value = e.target.value
+  }
+
+  const handleLowPass = (noise, e) => {
+    setLowPassFrequency(e.target.value)
+    noise.lowPassFilter.frequency.value = e.target.value
   }
 
   return (
@@ -81,11 +102,27 @@ const PinkNoise = () => {
       )}
       <input
         type="range"
-        onChange={(e) => volume(noise.current, e)}
+        onChange={(e) => handleGain(noise.current, e)}
         step={0.01}
         min={0}
         max={0.7}
         value={gain}></input>
+      <input
+        type="range"
+        onChange={(e) => handleHighPass(noise.current, e)}
+        step={1}
+        min={0}
+        max={20000}
+        value={highPassFrequency}></input>
+      {highPassFrequency}
+      <input
+        type="range"
+        onChange={(e) => handleLowPass(noise.current, e)}
+        step={1}
+        min={0}
+        max={16000}
+        value={lowPassFrequency}></input>
+      {lowPassFrequency}
     </div>
   )
 }
