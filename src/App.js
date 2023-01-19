@@ -1,11 +1,9 @@
-import PinkNoise from './components/noise/pink-noise'
+import ComplexPink from './components/complex-pink/index'
 
 function App() {
   return (
     <div className="App">
-      <PinkNoise />
-      <PinkNoise />
-      <PinkNoise />
+      <ComplexPink />
     </div>
   )
 }

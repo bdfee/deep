@@ -1,15 +1,15 @@
-import { useRef, useState } from 'react'
+/* eslint-disable react/prop-types */
+import { useState } from 'react'
 import { useAudioContext } from '../utility/useAudioContext'
 
-const PinkNoise = () => {
+const PinkNoise = (props) => {
+  console.log(props)
   const audioContext = useAudioContext()
 
-  const [gain, setGain] = useState(0.3)
-  const [highPassFrequency, setHighPassFrequency] = useState(20)
-  const [lowPassFrequency, setLowPassFrequency] = useState(12000)
+  const [gain, setGain] = useState(props.params.gain)
+  const [highPassFrequency, setHighPassFrequency] = useState(props.params.highPassFrequency)
+  const [lowPassFrequency, setLowPassFrequency] = useState(props.params.lowPassFrequency)
   const [isActive, setIsActive] = useState(false)
-
-  const noise = useRef({})
 
   const generateAudioBuffer = (noise) => {
     const bufferSize = 5 * audioContext.sampleRate
@@ -69,7 +69,6 @@ const PinkNoise = () => {
     setAudioNodeParams(noise)
     connectAudioNodes(noise)
     noise.audioSource.start()
-    console.log(noise.audioSource)
     setIsActive(true)
   }
 
@@ -92,24 +91,24 @@ const PinkNoise = () => {
     setLowPassFrequency(e.target.value)
     noise.lowPassFilter.frequency.value = e.target.value
   }
-
   return (
     <div>
+      {props.id}
       {!isActive ? (
-        <button onClick={() => play(noise.current)}>start</button>
+        <button onClick={() => play(props.track)}>start</button>
       ) : (
-        <button onClick={() => stop(noise.current)}>stop</button>
+        <button onClick={() => stop(props.track)}>stop</button>
       )}
       <input
         type="range"
-        onChange={(e) => handleGain(noise.current, e)}
+        onChange={(e) => handleGain(props.track, e)}
         step={0.01}
         min={0}
         max={0.7}
         value={gain}></input>
       <input
         type="range"
-        onChange={(e) => handleHighPass(noise.current, e)}
+        onChange={(e) => handleHighPass(props.track, e)}
         step={1}
         min={0}
         max={20000}
@@ -117,7 +116,7 @@ const PinkNoise = () => {
       {highPassFrequency}
       <input
         type="range"
-        onChange={(e) => handleLowPass(noise.current, e)}
+        onChange={(e) => handleLowPass(props.track, e)}
         step={1}
         min={0}
         max={16000}
