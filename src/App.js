@@ -1,11 +1,9 @@
-import Tracker from './components/tracker'
-import Clock from './components/clock'
+import PinkNoise from './components/noise/pink-noise'
 
 function App() {
   return (
     <div className="App">
-      <Clock />
-      <Tracker />
+      <PinkNoise />
     </div>
   )
 }
