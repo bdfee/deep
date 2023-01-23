@@ -1,9 +1,9 @@
-import PinkNoise from './components/noise/pink-noise'
+import Audio from './components/audio/index'
 
 function App() {
   return (
     <div className="App">
-      <PinkNoise />
+      <Audio />
     </div>
   )
 }
