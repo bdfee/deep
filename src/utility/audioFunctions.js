@@ -1,13 +1,13 @@
-export const createAudioNodes = (track, audio) => {
-  track.audioSource = audio.context.createBufferSource()
-  track.gainNode = audio.context.createGain()
-  track.lowpassFilter = audio.context.createBiquadFilter()
-  track.highpassFilter = audio.context.createBiquadFilter()
+export const createAudioNodes = (track, context) => {
+  track.audioSource = context.createBufferSource()
+  track.gainNode = context.createGain()
+  track.lowpassFilter = context.createBiquadFilter()
+  track.highpassFilter = context.createBiquadFilter()
 }
 
-export const createPinkNoiseAudioBuffer = (track, audio) => {
-  const bufferSize = 5 * audio.context.sampleRate
-  const buffer = audio.context.createBuffer(1, bufferSize, audio.context.sampleRate)
+export const createPinkNoiseAudioBuffer = (audioSource, context) => {
+  const bufferSize = 5 * context.sampleRate
+  const buffer = context.createBuffer(1, bufferSize, context.sampleRate)
   const output = buffer.getChannelData(0)
 
   let b0 = 0
@@ -31,22 +31,25 @@ export const createPinkNoiseAudioBuffer = (track, audio) => {
     b6 = white * 0.115926
   }
 
-  track.audioSource.buffer = buffer
+  audioSource.buffer = buffer
 }
 
-export const setAudioNodeParams = (track, params) => {
-  track.gainNode.gain.value = params.gain
-  track.audioSource.loop = true
-  track.lowpassFilter.type = 'lowpass'
-  track.highpassFilter.type = 'highpass'
-  track.lowpassFilter.frequency.value = params.lowpassFreq
-  track.highpassFilter.frequency.value = params.highpassFreq
+export const setAudioNodeParams = (
+  { gainNode, audioSource, lowpassFilter, highpassFilter },
+  { gain, lowpassFreq, highpassFreq }
+) => {
+  gainNode.gain.value = gain
+  audioSource.loop = true
+  lowpassFilter.type = 'lowpass'
+  highpassFilter.type = 'highpass'
+  lowpassFilter.frequency.value = lowpassFreq
+  highpassFilter.frequency.value = highpassFreq
 }
 
-export const connectAudioNodes = (track, audio) => {
+export const connectAudioNodes = (track, out, destination) => {
   track.audioSource.connect(track.gainNode)
   track.gainNode.connect(track.lowpassFilter)
   track.lowpassFilter.connect(track.highpassFilter)
-  track.highpassFilter.connect(audio.graph.out)
-  audio.graph.out.connect(audio.context.destination)
+  track.highpassFilter.connect(out)
+  out.connect(destination)
 }

@@ -8,10 +8,11 @@ import {
 } from '../utility/audioFunctions'
 
 const MainOut = ({ gain, setGain, handleStart, handleStop, isActive, context, out }) => {
-  // take in state parameters for ui
-
+  // handler (audio and state) and ui
   const handleGain = (value) => {
+    // apply value directly to audio
     out.gain.linearRampToValueAtTime(value, context.currentTime + 0.1)
+    // update state for ui and audio restart
     setGain(value)
   }
 
@@ -36,13 +37,14 @@ const MainOut = ({ gain, setGain, handleStart, handleStop, isActive, context, ou
 }
 
 const PinkNoise = ({ params, trackParams, setParams, trackNodes, context }) => {
+  // handler (audio and state) and ui
   const { id, gain, lowpassFreq, highpassFreq } = params
 
-  const handleSetTracks = (e) => {
+  const handleSetParams = (e) => {
     const value = Number(e.target.value)
     const id = e.target.parentElement.id
     const property = e.target.name
-
+    // apply value directly to audio
     switch (property) {
       case 'gain':
         trackNodes.gainNode.gain.linearRampToValueAtTime(value, context.currentTime + 0.01)
@@ -54,7 +56,7 @@ const PinkNoise = ({ params, trackParams, setParams, trackNodes, context }) => {
         trackNodes.highpassFilter.frequency.value = value
         break
     }
-
+    // update state for ui and audio restart
     const newState = trackParams.map((track) => {
       if (track.id === id) track[property] = value
       return track
@@ -73,7 +75,7 @@ const PinkNoise = ({ params, trackParams, setParams, trackNodes, context }) => {
         step={0.01}
         value={gain}
         onChange={(e) => {
-          handleSetTracks(e)
+          handleSetParams(e)
         }}></input>
       <input
         min={20}
@@ -83,7 +85,7 @@ const PinkNoise = ({ params, trackParams, setParams, trackNodes, context }) => {
         type="range"
         value={lowpassFreq}
         onChange={(e) => {
-          handleSetTracks(e)
+          handleSetParams(e)
         }}></input>
       <input
         min={20}
@@ -93,14 +95,14 @@ const PinkNoise = ({ params, trackParams, setParams, trackNodes, context }) => {
         type="range"
         value={highpassFreq}
         onChange={(e) => {
-          handleSetTracks(e)
+          handleSetParams(e)
         }}></input>
     </div>
   )
 }
 
 const Parameters = ({ audio }) => {
-  // everything that needs to be in state for an audio build, and start/stop handlers
+  // everything that needs to be in state for audio build on start
   const [gain, setGain] = useState(0)
   const [isActive, setIsActive] = useState(false)
   const [trackParams, setTrackParams] = useState([
@@ -126,13 +128,19 @@ const Parameters = ({ audio }) => {
 
   const handleStart = () => {
     audio.graph.out.gain.value = gain
-
+    // map params from inital or user defined state into audio on start
     trackParams.map((params) => {
+      // instantiate a track object within the graph.tracks object to store audio params, per track
       const track = (audio.graph.tracks[params.id] = {})
-      createAudioNodes(track, audio)
-      createPinkNoiseAudioBuffer(track, audio)
+      // create the nodes on the track audio graph
+      createAudioNodes(track, audio.context)
+      // pass the audioSource to add a pink noise buffer
+      createPinkNoiseAudioBuffer(track.audioSource, audio.context)
+      // pass the track and state parameters
       setAudioNodeParams(track, params)
-      connectAudioNodes(track, audio)
+      // pass the track, the sole main out, and the context destination (speakers)
+      connectAudioNodes(track, audio.graph.out, audio.context.destination)
+      // start the track
       track.audioSource.start()
     })
 
@@ -179,7 +187,7 @@ const Parameters = ({ audio }) => {
 }
 
 const Audio = () => {
-  // everything that doesn't get rebuilt on restart
+  // everything that doesn't need to be rebuild
   const audioContext = useAudioContext()
   const gainNode = audioContext.createGain()
   const audio = {
