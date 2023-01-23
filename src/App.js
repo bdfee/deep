@@ -1,4 +1,4 @@
-import Audio from './components/audio'
+import Audio from './components/audio/index'
 
 function App() {
   return (
