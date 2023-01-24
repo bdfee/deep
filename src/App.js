@@ -1,9 +1,9 @@
-import Audio from './components/audio/index'
+import CountUp from './components/count-up'
 
 function App() {
   return (
     <div className="App">
-      <Audio />
+      <CountUp />
     </div>
   )
 }
