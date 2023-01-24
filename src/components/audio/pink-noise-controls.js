@@ -28,7 +28,7 @@ const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context
 
   return (
     <div id={id}>
-      {id}
+      {id}: gain - {gain}
       <input
         type="range"
         name={'gain'}
@@ -39,6 +39,7 @@ const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context
         onChange={(e) => {
           handleSetParams(e)
         }}></input>
+      lowpass frequency - {lowpassFreq}
       <input
         min={20}
         max={16000}
@@ -49,6 +50,7 @@ const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context
         onChange={(e) => {
           handleSetParams(e)
         }}></input>
+      highpass frequency - {highpassFreq}
       <input
         min={20}
         name={'highpassFreq'}
