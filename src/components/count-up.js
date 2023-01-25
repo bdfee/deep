@@ -35,7 +35,6 @@ const Timer = () => {
     return new Date(ms).toISOString().slice(11, 19)
   }
 
-  console.log('render')
   return (
     <div>
       {!isActive ? (

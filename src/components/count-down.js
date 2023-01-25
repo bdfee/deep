@@ -4,6 +4,7 @@ const CountDown = () => {
   const [isActive, setIsActive] = useState(false)
   const [entryStart, setEntryStart] = useState({})
   const [entries, setEntries] = useState([])
+
   const [timeInMins, setTimeInMins] = useState(1)
   const [display, setDisplay] = useState('')
   const accruedTimeMsRef = useRef(0)
@@ -13,8 +14,6 @@ const CountDown = () => {
   useEffect(() => {
     if (isActive) {
       const interval = setInterval(() => {
-        console.log(isActive)
-        console.log(totalTimeInMs())
         if (totalTimeInMs() >= countToMsRef.current) {
           setIsActive(false)
           setDisplay(`${formatTime(totalTimeInMs())} ${formatTime(countToMsRef.current)} complete`)
@@ -31,7 +30,7 @@ const CountDown = () => {
 
   const handleStartTimer = () => {
     if (!isActive) {
-      countToMsRef.current = timeInMins * 60000
+      countToMsRef.current = timeInMins * 60000 // conditioned on timer type
       setEntryStart(new Date())
       setIsActive(true)
     }
@@ -49,7 +48,7 @@ const CountDown = () => {
   const handleClearTimer = () => {
     setEntryStart({})
     accruedTimeMsRef.current = 0
-    countToMsRef.current = null
+    countToMsRef.current = null // conditioned on timer type
     setIsActive(false)
   }
 

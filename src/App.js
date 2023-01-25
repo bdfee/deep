@@ -1,9 +1,9 @@
-import CountDown from './components/count-down'
+import Timer from './components/timer/index'
 
 function App() {
   return (
     <div className="App">
-      <CountDown />
+      <Timer />
     </div>
   )
 }
