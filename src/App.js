@@ -1,9 +1,9 @@
-import CountUp from './components/count-up'
+import CountDown from './components/count-down'
 
 function App() {
   return (
     <div className="App">
-      <CountUp />
+      <CountDown />
     </div>
   )
 }
