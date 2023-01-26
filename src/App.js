@@ -1,9 +1,9 @@
-import Timer from './components/timer/index'
+import Log from './components/log/index'
 
 function App() {
   return (
     <div className="App">
-      <Timer />
+      <Log />
     </div>
   )
 }
