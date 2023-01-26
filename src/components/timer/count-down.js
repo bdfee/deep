@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import ToggleStart from './toggle-start'
+import { formatTime } from '../utility'
 
 const CountDown = ({
   isActive,
@@ -8,7 +9,6 @@ const CountDown = ({
   handleClearTimer,
   display,
   setDisplay,
-  formatTime,
   totalTimeInMs
 }) => {
   const countToMsRef = useRef(null)
