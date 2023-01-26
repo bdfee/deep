@@ -1,9 +1,9 @@
-import Log from './components/log/index'
+import Container from './components/container'
 
 function App() {
   return (
     <div className="App">
-      <Log />
+      <Container />
     </div>
   )
 }
