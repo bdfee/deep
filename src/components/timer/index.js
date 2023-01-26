@@ -3,27 +3,19 @@ import CountDown from './count-down'
 import { useState, useRef } from 'react'
 
 const tempCategoryList = ['deep', 'full stack open', 'space fight']
-const tempEntryObj = {
-  category: 'deep',
-  entries: [
-    ['2023-01-26T18:30:24.221Z', '2023-01-26T18:30:26.177Z'],
-    ['2023-01-26T18:30:27.462Z', '2023-01-26T18:30:29.228Z']
-  ]
-}
-const tempEntry = ['2023-01-25T18:30:27.462Z', '2023-01-25T18:30:29.228Z']
+// TODO condition handlers for checking if selected category
 
 const Timer = () => {
   const [isActive, setIsActive] = useState(false)
+  const [log, setLog] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [entryStart, setEntryStart] = useState({})
-  // {category: id, entries: []}
-  const [entries, setEntries] = useState([]) // {}
+  const [entryStartTime, setEntryStartTime] = useState({})
   const [display, setDisplay] = useState('')
   const [toggleCountDown, setToggleCountDown] = useState(false)
   const accruedTimeMsRef = useRef(0)
 
   const totalTimeInMs = () => {
-    if (isActive) return accruedTimeMsRef.current + (new Date() - entryStart)
+    if (isActive) return accruedTimeMsRef.current + (new Date() - entryStartTime)
     else return accruedTimeMsRef.current
   }
 
@@ -33,45 +25,47 @@ const Timer = () => {
 
   const handleStartTimer = () => {
     if (!isActive) {
-      setEntryStart(new Date())
+      setEntryStartTime(new Date())
       setIsActive(true)
     }
   }
 
-  const createEntry = (...entries) => {
-    if (selectedCategory) {
-      const entryExists = entries.filter((entry) => entry.category === selectedCategory)
-      if (entryExists.length) {
-        entryExists[0].entries.push(tempEntry)
-        console.log(entryExists)
-      } else {
-        const newEntry = {
-          category: selectedCategory,
-          entries: [tempEntry]
-        }
-        console.log(newEntry)
+  const createEntry = () => {
+    const newEntry = [entryStartTime, new Date()]
+    const isExistingCategory = log.filter((entry) => entry.category === selectedCategory)
+
+    if (isExistingCategory.length) {
+      setLog(
+        log.map((item) => {
+          if (item.category === selectedCategory) item.entries.push(newEntry)
+          return item
+        })
+      )
+    } else {
+      const newLogItem = {
+        category: selectedCategory,
+        entries: [newEntry]
       }
-    } else console.log('no category selected')
+      setLog(log.concat(newLogItem))
+    }
   }
 
   const handleStopTimer = () => {
     if (isActive) {
       accruedTimeMsRef.current = totalTimeInMs()
-      const newEntry = [[entryStart, new Date()]]
-      setEntries(entries.concat(newEntry))
+      createEntry()
       setIsActive(false)
-      console.log(entries)
     }
   }
 
   const handleClearTimer = () => {
-    setEntryStart({})
+    setEntryStartTime({})
     accruedTimeMsRef.current = 0
     setIsActive(false)
   }
 
-  const handleClearEntries = () => setEntries([])
-  const categoryStyle = { background: 'black', color: 'white' }
+  const handleClearEntries = () => setLog([])
+  const selectedStyle = { background: 'black', color: 'white' }
 
   return (
     <div>
@@ -98,9 +92,9 @@ const Timer = () => {
         />
       )}
       <div>
-        categories
+        log
         {tempCategoryList.map((category) => {
-          const style = selectedCategory === category ? categoryStyle : null
+          const style = selectedCategory === category ? selectedStyle : null
           return (
             <button
               style={style}
@@ -113,12 +107,18 @@ const Timer = () => {
         })}
       </div>
       <div>
-        entries
-        {entries.map(([start, stop]) => (
-          <p key={start}>{formatTime(stop - start)}</p>
-        ))}
+        items
+        {log.map(({ category, entries }) => {
+          return (
+            <ul key={category}>
+              {category}
+              {entries.map(([start, stop]) => (
+                <li key={start}>{formatTime(stop - start)}</li>
+              ))}
+            </ul>
+          )
+        })}
         <button onClick={handleClearEntries}>clear entries</button>
-        <button onClick={() => createEntry(tempEntryObj)}>create entry obj</button>
       </div>
     </div>
   )
