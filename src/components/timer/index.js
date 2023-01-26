@@ -3,6 +3,14 @@ import CountDown from './count-down'
 import { useState, useRef } from 'react'
 
 const tempCategoryList = ['deep', 'full stack open', 'space fight']
+const tempEntryObj = {
+  category: 'deep',
+  entries: [
+    ['2023-01-26T18:30:24.221Z', '2023-01-26T18:30:26.177Z'],
+    ['2023-01-26T18:30:27.462Z', '2023-01-26T18:30:29.228Z']
+  ]
+}
+const tempEntry = ['2023-01-25T18:30:27.462Z', '2023-01-25T18:30:29.228Z']
 
 const Timer = () => {
   const [isActive, setIsActive] = useState(false)
@@ -30,12 +38,29 @@ const Timer = () => {
     }
   }
 
+  const createEntry = (...entries) => {
+    if (selectedCategory) {
+      const entryExists = entries.filter((entry) => entry.category === selectedCategory)
+      if (entryExists.length) {
+        entryExists[0].entries.push(tempEntry)
+        console.log(entryExists)
+      } else {
+        const newEntry = {
+          category: selectedCategory,
+          entries: [tempEntry]
+        }
+        console.log(newEntry)
+      }
+    } else console.log('no category selected')
+  }
+
   const handleStopTimer = () => {
     if (isActive) {
       accruedTimeMsRef.current = totalTimeInMs()
       const newEntry = [[entryStart, new Date()]]
       setEntries(entries.concat(newEntry))
       setIsActive(false)
+      console.log(entries)
     }
   }
 
@@ -93,6 +118,7 @@ const Timer = () => {
           <p key={start}>{formatTime(stop - start)}</p>
         ))}
         <button onClick={handleClearEntries}>clear entries</button>
+        <button onClick={() => createEntry(tempEntryObj)}>create entry obj</button>
       </div>
     </div>
   )
