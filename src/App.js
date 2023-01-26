@@ -1,9 +1,9 @@
-import Audio from './components/audio/index'
+import Timer from './components/timer/index'
 
 function App() {
   return (
     <div className="App">
-      <Audio />
+      <Timer />
     </div>
   )
 }
