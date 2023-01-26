@@ -14,7 +14,6 @@ const MainOutControls = ({ gain, setGain, handleStart, handleStop, isActive, con
       ) : (
         <button onClick={() => handleStop()}>stop</button>
       )}
-      gain - {gain}
       <input
         value={gain}
         type="range"
@@ -23,7 +22,8 @@ const MainOutControls = ({ gain, setGain, handleStart, handleStop, isActive, con
         step={0.01}
         onChange={({ target }) => {
           handleGain(Number(target.value))
-        }}></input>
+        }}></input>{' '}
+      gain - {gain}
     </div>
   )
 }

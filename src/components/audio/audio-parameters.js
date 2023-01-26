@@ -86,6 +86,7 @@ const AudioParameters = ({ audio }) => {
             setParams={setTrackParams}
             trackNodes={audio.graph.tracks[key]}
             context={audio.context}
+            isActive={isActive}
           />
         )
       })}
