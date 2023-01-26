@@ -41,16 +41,19 @@ const Timer = () => {
     setIsActive(false)
   }
 
+  const handleClearEntries = () => setEntries([])
+
   return (
     <div>
       <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle counter</button>
+      <div>accrued time ref {formatTime(accruedTimeMsRef.current)}</div>
       {toggleCountDown ? (
         <CountDown
           isActive={isActive}
           setIsActive={setIsActive}
           handleStopTimer={handleStopTimer}
           handleStartTimer={handleStartTimer}
-          handelClearTimer={handleClearTimer}
+          handleClearTimer={handleClearTimer}
           display={display}
           setDisplay={setDisplay}
           formatTime={formatTime}
@@ -64,6 +67,13 @@ const Timer = () => {
           handleClearTimer={handleClearTimer}
         />
       )}
+      <div>
+        entries
+        {entries.map(([start, stop]) => (
+          <p key={start}>{formatTime(stop - start)}</p>
+        ))}
+        <button onClick={handleClearEntries}>clear entries</button>
+      </div>
     </div>
   )
 }
