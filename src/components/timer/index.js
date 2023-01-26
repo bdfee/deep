@@ -2,10 +2,14 @@ import CountUp from './count-up'
 import CountDown from './count-down'
 import { useState, useRef } from 'react'
 
+const tempCategoryList = ['deep', 'full stack open', 'space fight']
+
 const Timer = () => {
   const [isActive, setIsActive] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [entryStart, setEntryStart] = useState({})
-  const [entries, setEntries] = useState([])
+  // {category: id, entries: []}
+  const [entries, setEntries] = useState([]) // {}
   const [display, setDisplay] = useState('')
   const [toggleCountDown, setToggleCountDown] = useState(false)
   const accruedTimeMsRef = useRef(0)
@@ -42,6 +46,7 @@ const Timer = () => {
   }
 
   const handleClearEntries = () => setEntries([])
+  const categoryStyle = { background: 'black', color: 'white' }
 
   return (
     <div>
@@ -67,6 +72,21 @@ const Timer = () => {
           handleClearTimer={handleClearTimer}
         />
       )}
+      <div>
+        categories
+        {tempCategoryList.map((category) => {
+          const style = selectedCategory === category ? categoryStyle : null
+          return (
+            <button
+              style={style}
+              key={category}
+              value={category}
+              onClick={({ target }) => setSelectedCategory(target.value)}>
+              {category}
+            </button>
+          )
+        })}
+      </div>
       <div>
         entries
         {entries.map(([start, stop]) => (
