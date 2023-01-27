@@ -1,11 +1,13 @@
 import Log from './log/index'
-import Audio from './audio/index'
+import AudioParameters from './audio/audio-parameters'
+
+// start needs to hit audioparams file, count down where handler is augmented, and toggle
 
 const Container = () => {
   return (
     <div>
+      <AudioParameters />
       <Log />
-      <Audio />
     </div>
   )
 }

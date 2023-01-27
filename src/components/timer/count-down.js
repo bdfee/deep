@@ -18,7 +18,7 @@ const CountDown = ({
     if (isActive) {
       const interval = setInterval(() => {
         if (totalTimeInMs() >= countToMsRef.current) {
-          setDisplay(`${formatTime(totalTimeInMs())} ${formatTime(countToMsRef.current)} complete`)
+          setDisplay(`${formatTime(countToMsRef.current)} complete`)
           handleStopTimer()
         }
       }, 1000)

@@ -1,14 +1,24 @@
 import { useState } from 'react'
+import PinkNoiseControls from './pink-noise-controls'
+import MainOutControls from './main-out-controls'
 import {
   createAudioNodes,
   createPinkNoiseAudioBuffer,
   setAudioNodeParams,
   connectAudioNodes
-} from './utility/audioFunctions'
-import PinkNoiseControls from './pink-noise-controls'
-import MainOutControls from './main-out-controls'
+} from './audio.helpers'
 
-const AudioParameters = ({ audio }) => {
+const audioContext = new AudioContext()
+const gainNode = audioContext.createGain()
+const audio = {
+  context: audioContext,
+  graph: {
+    out: gainNode,
+    tracks: {}
+  }
+}
+
+const AudioParameters = () => {
   // everything that needs to be in state for audio build on start
   const [gain, setGain] = useState(0)
   const [isActive, setIsActive] = useState(false)
@@ -61,6 +71,7 @@ const AudioParameters = ({ audio }) => {
 
   return (
     <div>
+      <h2>pink noise</h2>
       <button
         onClick={() => {
           console.log(audio)
@@ -77,14 +88,13 @@ const AudioParameters = ({ audio }) => {
         out={audio.graph.out}
       />
       {trackParams.map((params) => {
-        const key = params.id
         return (
           <PinkNoiseControls
-            key={key}
+            key={params.id}
             params={params}
             trackParams={trackParams}
             setParams={setTrackParams}
-            trackNodes={audio.graph.tracks[key]}
+            trackNodes={audio.graph.tracks[params.id]}
             context={audio.context}
             isActive={isActive}
           />

@@ -32,18 +32,25 @@ const Log = () => {
 
   return (
     <div>
+      <h2>Log</h2>
+      <h3>timer</h3>
       <Timer
         log={log}
         setLog={setLog}
         selectedCategory={selectedCategory}
         createEntry={createEntry}
       />
+      <h3>categories</h3>
       <Categories
         categoryList={tempCategoryList}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
+      <h3>entries</h3>
       <Items log={log} formatTime={formatTime} />
+      <div>
+        <button onClick={() => setLog([])}>clear log</button>
+      </div>
     </div>
   )
 }

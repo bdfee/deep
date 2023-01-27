@@ -41,7 +41,7 @@ const Timer = ({ createEntry }) => {
 
   return (
     <div>
-      <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle counter</button>
+      <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle timer</button>
       <div>accrued time ref {formatTime(accruedTimeMsRef.current)}</div>
       {toggleCountDown ? (
         <CountDown

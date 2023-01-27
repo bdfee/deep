@@ -2,7 +2,7 @@ const ToggleStart = ({ isActive, handleStartTimer, handleClearTimer, handleStopT
   return !isActive ? (
     <>
       <button onClick={handleStartTimer}>start</button>
-      <button onClick={handleClearTimer}>clear timer</button>
+      <button onClick={handleClearTimer}>clear time ref</button>
     </>
   ) : (
     <button onClick={handleStopTimer}>pause</button>

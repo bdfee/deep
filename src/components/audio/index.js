@@ -1,19 +1,22 @@
-import { useAudioContext } from './utility/useAudioContext'
-import AudioParameters from './audio-parameters'
+// import AudioParameters from './audio-parameters'
 
-const Audio = () => {
-  // everything that doesn't need to be rebuilt on sound start
-  const audioContext = useAudioContext()
-  const gainNode = audioContext.createGain()
-  const audio = {
-    context: audioContext,
-    graph: {
-      out: gainNode,
-      tracks: {}
-    }
-  }
+// // delete
+// let render = 0
+// // Redux to selectively update the component?
+// const Audio = () => {
+//   // everything that doesn't get rebuilt on sound start
+//   const audioContext = new AudioContext()
+//   const gainNode = audioContext.createGain()
+//   const audio = {
+//     context: audioContext,
+//     graph: {
+//       out: gainNode,
+//       tracks: {}
+//     }
+//   }
+//   render++
+//   console.log('Audio context file', render)
+//   return <AudioParameters audio={audio} />
+// }
 
-  return <AudioParameters audio={audio} />
-}
-
-export default Audio
+// export default Audio
