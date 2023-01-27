@@ -1,25 +1,18 @@
 import CountUp from './count-up'
 import CountDown from './count-down'
-import { useState, useRef, useEffect } from 'react'
-import { formatTime } from '../log.helpers'
+import { useState, useEffect } from 'react'
+// import { formatTime } from '../log.helpers'
 
-// TODO condition handlers for checking if selected category
-
-const Timer = ({ createEntry, isRunning }) => {
+const Timer = ({ createEntry, isRunning, setIsRunning }) => {
   const [isActive, setIsActive] = useState(false)
   const [entryStartTime, setEntryStartTime] = useState({})
-  const [display, setDisplay] = useState('')
   const [toggleCountDown, setToggleCountDown] = useState(false)
-  const accruedTimeMsRef = useRef(0)
 
   useEffect(() => {
     !isRunning ? handleStopTimer() : handleStartTimer()
   }, [isRunning])
 
-  const totalTimeInMs = () => {
-    if (isActive) return accruedTimeMsRef.current + (new Date() - entryStartTime)
-    else return accruedTimeMsRef.current
-  }
+  const totalTimeInMs = () => new Date() - entryStartTime
 
   const handleStartTimer = () => {
     if (!isActive) {
@@ -30,36 +23,36 @@ const Timer = ({ createEntry, isRunning }) => {
 
   const handleStopTimer = () => {
     if (isActive) {
-      accruedTimeMsRef.current = totalTimeInMs()
       createEntry(entryStartTime)
+      setIsRunning(false)
       setIsActive(false)
     }
   }
 
   const handleClearTimer = () => {
     setEntryStartTime({})
-    accruedTimeMsRef.current = 0
     setIsActive(false)
   }
 
   return (
     <div>
-      <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle timer</button>
-      <div>accrued time ref {formatTime(accruedTimeMsRef.current)}</div>
+      {!isActive ? (
+        <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle timer</button>
+      ) : null}
+
       {toggleCountDown ? (
         <CountDown
           isActive={isActive}
-          setIsActive={setIsActive}
+          setIsRunning={setIsRunning}
           handleStopTimer={handleStopTimer}
           handleStartTimer={handleStartTimer}
           handleClearTimer={handleClearTimer}
-          display={display}
-          setDisplay={setDisplay}
           totalTimeInMs={totalTimeInMs}
         />
       ) : (
         <CountUp
           isActive={isActive}
+          setIsRunning={setIsRunning}
           handleStartTimer={handleStartTimer}
           handleStopTimer={handleStopTimer}
           handleClearTimer={handleClearTimer}
