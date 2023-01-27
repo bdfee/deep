@@ -1,4 +1,11 @@
-const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context }) => {
+const PinkNoiseControls = ({
+  params,
+  trackParams,
+  setParams,
+  trackNodes,
+  context,
+  trackFilterDefaults
+}) => {
   // handler (audio and state) and ui
   const { id, gain, lowpassFreq, highpassFreq } = params
 
@@ -29,6 +36,8 @@ const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context
     setParams(newState)
   }
 
+  const { min, max } = trackFilterDefaults
+
   return (
     <div id={id}>
       {id}
@@ -44,8 +53,19 @@ const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context
         }}></input>{' '}
       gain: {gain}
       <input
-        min={20}
-        max={16000}
+        min={min}
+        name={'highpassFreq'}
+        max={max}
+        step={1}
+        type="range"
+        value={highpassFreq}
+        onChange={(e) => {
+          handleSetParams(e)
+        }}></input>{' '}
+      highpass: {highpassFreq}
+      <input
+        min={min}
+        max={max}
         name={'lowpassFreq'}
         step={1}
         type="range"
@@ -54,17 +74,6 @@ const PinkNoiseControls = ({ params, trackParams, setParams, trackNodes, context
           handleSetParams(e)
         }}></input>{' '}
       lowpass: {lowpassFreq}
-      <input
-        min={20}
-        name={'highpassFreq'}
-        max={16000}
-        step={1}
-        type="range"
-        value={highpassFreq}
-        onChange={(e) => {
-          handleSetParams(e)
-        }}></input>{' '}
-      highpass: {highpassFreq}
     </div>
   )
 }
