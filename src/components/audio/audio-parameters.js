@@ -21,28 +21,43 @@ const audio = {
 
 const AudioParameters = ({ isRunning }) => {
   // state parameters of ui, values used to rebuild the audio object in handleStart and map the filter components
-  const [gain, setGain] = useState(0)
+  const [gain, setGain] = useState(0.5)
   const [isActive, setIsActive] = useState(false)
   const [trackParams, setTrackParams] = useState([
     {
       id: 'lowPink',
-      gain: 0.5,
-      lowpassFreq: 60,
-      highpassFreq: 20
+      gain: 0.6,
+      highpassFreq: 30,
+      lowpassFreq: 60
     },
     {
       id: 'midPink',
       gain: 0.1,
-      lowpassFreq: 900,
-      highpassFreq: 600
+      highpassFreq: 80,
+      lowpassFreq: 300
     },
     {
       id: 'highPink',
       gain: 0.4,
-      lowpassFreq: 12000,
-      highpassFreq: 9000
+      highpassFreq: 10000,
+      lowpassFreq: 12000
     }
   ])
+
+  const filterDefaults = {
+    lowPink: {
+      min: 0,
+      max: 70
+    },
+    midPink: {
+      min: 80,
+      max: 5000
+    },
+    highPink: {
+      min: 8000,
+      max: 14000
+    }
+  }
 
   useEffect(() => {
     !isRunning ? handleStop() : handleStart()
@@ -91,6 +106,7 @@ const AudioParameters = ({ isRunning }) => {
           <PinkNoiseControls
             key={params.id}
             params={params}
+            trackFilterDefaults={filterDefaults[params.id]}
             trackParams={trackParams}
             setParams={setTrackParams}
             trackNodes={audio.graph.tracks[params.id]}
