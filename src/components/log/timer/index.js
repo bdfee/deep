@@ -1,7 +1,6 @@
 import CountUp from './count-up'
 import CountDown from './count-down'
 import { useState, useEffect } from 'react'
-// import { formatTime } from '../log.helpers'
 
 const Timer = ({ createEntry, isRunning, setIsRunning }) => {
   const [isActive, setIsActive] = useState(false)
