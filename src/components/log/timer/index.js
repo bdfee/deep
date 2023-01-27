@@ -1,17 +1,21 @@
 import CountUp from './count-up'
 import CountDown from './count-down'
-import { useState, useRef } from 'react'
-import { formatTime } from '../utility'
+import { useState, useRef, useEffect } from 'react'
+import { formatTime } from '../log.helpers'
 
 // TODO condition handlers for checking if selected category
 
-const Timer = ({ createEntry }) => {
+const Timer = ({ createEntry, isRunning }) => {
   const [isActive, setIsActive] = useState(false)
 
   const [entryStartTime, setEntryStartTime] = useState({})
   const [display, setDisplay] = useState('')
   const [toggleCountDown, setToggleCountDown] = useState(false)
   const accruedTimeMsRef = useRef(0)
+
+  useEffect(() => {
+    !isRunning ? handleStopTimer() : handleStartTimer()
+  }, [isRunning])
 
   const totalTimeInMs = () => {
     if (isActive) return accruedTimeMsRef.current + (new Date() - entryStartTime)
@@ -41,7 +45,7 @@ const Timer = ({ createEntry }) => {
 
   return (
     <div>
-      <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle counter</button>
+      <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle timer</button>
       <div>accrued time ref {formatTime(accruedTimeMsRef.current)}</div>
       {toggleCountDown ? (
         <CountDown

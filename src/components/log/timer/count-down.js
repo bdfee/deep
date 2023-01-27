@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import ToggleStart from './toggle-start'
-import { formatTime } from '../utility'
+import { formatTime } from '../log.helpers'
 
 const CountDown = ({
   isActive,
@@ -18,7 +18,7 @@ const CountDown = ({
     if (isActive) {
       const interval = setInterval(() => {
         if (totalTimeInMs() >= countToMsRef.current) {
-          setDisplay(`${formatTime(totalTimeInMs())} ${formatTime(countToMsRef.current)} complete`)
+          setDisplay(`${formatTime(countToMsRef.current)} complete`)
           handleStopTimer()
         }
       }, 1000)
