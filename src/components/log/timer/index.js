@@ -7,7 +7,6 @@ import { formatTime } from '../log.helpers'
 
 const Timer = ({ createEntry, isRunning }) => {
   const [isActive, setIsActive] = useState(false)
-
   const [entryStartTime, setEntryStartTime] = useState({})
   const [display, setDisplay] = useState('')
   const [toggleCountDown, setToggleCountDown] = useState(false)
