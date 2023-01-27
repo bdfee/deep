@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import PinkNoiseControls from './pink-noise-controls'
 import MainOutControls from './main-out-controls'
 import {
@@ -18,7 +18,7 @@ const audio = {
   }
 }
 
-const AudioParameters = () => {
+const AudioParameters = ({ isRunning }) => {
   // everything that needs to be in state for audio build on start
   const [gain, setGain] = useState(0)
   const [isActive, setIsActive] = useState(false)
@@ -63,6 +63,10 @@ const AudioParameters = () => {
 
     setIsActive(true)
   }
+
+  useEffect(() => {
+    !isRunning ? handleStop() : handleStart()
+  }, [isRunning])
 
   const handleStop = () => {
     Object.values(audio.graph.tracks).map((track) => track.audioSource.stop())

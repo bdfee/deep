@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import Categories from './categories'
 import Items from './items'
-import Timer from '../timer/index'
-import { formatTime } from '../utility'
+import Timer from './timer/index'
+import { formatTime } from './log.helpers'
 
 const tempCategoryList = ['deep', 'full stack open', 'space fight']
 
-const Log = () => {
+const Log = ({ isRunning }) => {
   const [log, setLog] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
 
@@ -39,6 +39,7 @@ const Log = () => {
         setLog={setLog}
         selectedCategory={selectedCategory}
         createEntry={createEntry}
+        isRunning={isRunning}
       />
       <h3>categories</h3>
       <Categories

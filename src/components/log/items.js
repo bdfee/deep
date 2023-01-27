@@ -1,4 +1,4 @@
-import { formatTime } from '../utility'
+import { formatTime } from './log.helpers'
 
 const Items = ({ log }) => {
   return log.map(({ category, entries }) => {

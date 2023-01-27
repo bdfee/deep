@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import ToggleStart from './toggle-start'
-import { formatTime } from '../utility'
+import { formatTime } from '../log.helpers'
 
 const CountDown = ({
   isActive,
