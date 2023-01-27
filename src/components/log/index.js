@@ -6,9 +6,9 @@ import { formatTime } from './log.helpers'
 
 const tempCategoryList = ['deep', 'full stack open', 'space fight']
 
-const Log = ({ isRunning }) => {
+const Log = ({ isRunning, setIsRunning }) => {
   const [log, setLog] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState(tempCategoryList[0])
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
@@ -40,6 +40,7 @@ const Log = ({ isRunning }) => {
         selectedCategory={selectedCategory}
         createEntry={createEntry}
         isRunning={isRunning}
+        setIsRunning={setIsRunning}
       />
       <h3>categories</h3>
       <Categories

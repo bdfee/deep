@@ -8,7 +8,7 @@ const Container = () => {
     <div>
       <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
       <AudioParameters isRunning={isRunning} />
-      <Log isRunning={isRunning} />
+      <Log isRunning={isRunning} setIsRunning={setIsRunning} />
     </div>
   )
 }
