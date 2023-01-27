@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
@@ -8,7 +8,13 @@ const tempCategoryList = ['deep', 'full stack open', 'space fight']
 
 const Log = ({ isRunning, setIsRunning }) => {
   const [log, setLog] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState(tempCategoryList[0])
+  const [categories, setCategories] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState('')
+
+  useEffect(() => {
+    setCategories(tempCategoryList)
+    setSelectedCategory(tempCategoryList[0])
+  }, [])
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
@@ -44,7 +50,8 @@ const Log = ({ isRunning, setIsRunning }) => {
       />
       <h3>categories</h3>
       <Categories
-        categoryList={tempCategoryList}
+        categories={categories}
+        setCategories={setCategories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
