@@ -50,7 +50,8 @@ const Log = ({ isRunning, setIsRunning }) => {
       />
       <h3>categories</h3>
       <Categories
-        categoryList={categories}
+        categories={categories}
+        setCategories={setCategories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
