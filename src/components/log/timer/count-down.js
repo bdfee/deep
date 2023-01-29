@@ -1,37 +1,26 @@
 import { useState, useEffect, useRef } from 'react'
-import ToggleStart from './toggle-start'
 
-const CountDown = ({
-  isActive,
-  handleStartTimer,
-  handleStopTimer,
-  handleClearTimer,
-  totalTimeInMs
-}) => {
-  const countToMsRef = useRef(null)
+const CountDown = ({ isActive, handleStopTimer, totalTimeInMs }) => {
+  const countToMsRef = useRef()
   const [timeInMins, setTimeInMins] = useState(1)
 
   useEffect(() => {
     if (isActive) {
+      countToMsRef.current = timeInMins * 60000
       const interval = setInterval(() => {
         if (totalTimeInMs() >= countToMsRef.current) {
           handleStopTimer()
         }
       }, 1000)
       return () => clearInterval(interval)
+    } else {
+      countToMsRef.current = 0
     }
   }, [isActive])
 
-  const handleStartAndRef = () => {
-    if (!isActive) {
-      countToMsRef.current = timeInMins * 60000
-      handleStartTimer()
-    }
-  }
-
-  const handleClearAndRef = () => {
-    handleClearTimer()
-    countToMsRef.current = null
+  const handleSetTime = (value) => {
+    countToMsRef.current = value * 60000
+    setTimeInMins(value)
   }
 
   return (
@@ -44,15 +33,9 @@ const CountDown = ({
         step={1}
         value={timeInMins}
         onChange={({ target }) => {
-          setTimeInMins(target.value)
+          handleSetTime(target.value)
         }}></input>
       {timeInMins} minutes
-      <ToggleStart
-        isActive={isActive}
-        handleStartTimer={handleStartAndRef}
-        handleStopTimer={handleStopTimer}
-        handleClearTimer={handleClearAndRef}
-      />
     </div>
   )
 }

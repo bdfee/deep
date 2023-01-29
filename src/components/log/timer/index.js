@@ -28,34 +28,21 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
     }
   }
 
-  const handleClearTimer = () => {
-    setEntryStartTime({})
-    setIsActive(false)
-  }
-
   return (
     <div>
       {!isActive ? (
         <button onClick={() => setToggleCountDown(!toggleCountDown)}>toggle timer</button>
-      ) : null}
-
+      ) : (
+        ''
+      )}
       {toggleCountDown ? (
         <CountDown
           isActive={isActive}
-          setIsRunning={setIsRunning}
           handleStopTimer={handleStopTimer}
-          handleStartTimer={handleStartTimer}
-          handleClearTimer={handleClearTimer}
           totalTimeInMs={totalTimeInMs}
         />
       ) : (
-        <CountUp
-          isActive={isActive}
-          setIsRunning={setIsRunning}
-          handleStartTimer={handleStartTimer}
-          handleStopTimer={handleStopTimer}
-          handleClearTimer={handleClearTimer}
-        />
+        <CountUp />
       )}
     </div>
   )
