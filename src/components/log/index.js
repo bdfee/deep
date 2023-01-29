@@ -11,15 +11,13 @@ const tempCategoryList = [
   { name: 'space fight', id: tempId() }
 ]
 
-// add ID to entrys and make them removeable
-
 const Log = ({ isRunning, setIsRunning }) => {
   const [log, setLog] = useState([])
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    setCategories(tempCategoryList) // object {name: cdcdc, id:  dsd}
+    setCategories(tempCategoryList)
     setSelectedCategory(tempCategoryList[0])
   }, [])
 
