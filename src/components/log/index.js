@@ -2,9 +2,16 @@ import { useState, useEffect } from 'react'
 import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
-import { formatTime } from './log.helpers'
 
-const tempCategoryList = ['deep', 'full stack open', 'space fight']
+const tempId = () => (Math.random() * 100).toFixed(2).toString()
+
+const tempCategoryList = [
+  { name: 'deep', id: tempId() },
+  { name: 'full stack open', id: tempId() },
+  { name: 'space fight', id: tempId() }
+]
+
+// add ID to entrys and make them removeable
 
 const Log = ({ isRunning, setIsRunning }) => {
   const [log, setLog] = useState([])
@@ -12,18 +19,18 @@ const Log = ({ isRunning, setIsRunning }) => {
   const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    setCategories(tempCategoryList)
+    setCategories(tempCategoryList) // object {name: cdcdc, id:  dsd}
     setSelectedCategory(tempCategoryList[0])
   }, [])
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
-    const isExistingCategory = log.filter((entry) => entry.category === selectedCategory)
+    const isExistingLogCategory = log.filter((item) => item.category.id === selectedCategory.id)
 
-    if (isExistingCategory.length) {
+    if (isExistingLogCategory.length) {
       setLog(
         log.map((item) => {
-          if (item.category === selectedCategory) item.entries.push(newEntry)
+          if (item.category.id === selectedCategory.id) item.entries.push(newEntry)
           return item
         })
       )
@@ -40,14 +47,7 @@ const Log = ({ isRunning, setIsRunning }) => {
     <div>
       <h2>Log</h2>
       <h3>timer</h3>
-      <Timer
-        log={log}
-        setLog={setLog}
-        selectedCategory={selectedCategory}
-        createEntry={createEntry}
-        isRunning={isRunning}
-        setIsRunning={setIsRunning}
-      />
+      <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
       <h3>categories</h3>
       <Categories
         categories={categories}
@@ -56,10 +56,7 @@ const Log = ({ isRunning, setIsRunning }) => {
         setSelectedCategory={setSelectedCategory}
       />
       <h3>entries</h3>
-      <Items log={log} formatTime={formatTime} />
-      <div>
-        <button onClick={() => setLog([])}>clear log</button>
-      </div>
+      <Items log={log} setLog={setLog} />
     </div>
   )
 }
