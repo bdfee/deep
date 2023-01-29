@@ -86,12 +86,6 @@ const AudioParameters = ({ isRunning }) => {
   return (
     <div>
       <h2>pink noise</h2>
-      <button
-        onClick={() => {
-          console.log(audio)
-        }}>
-        log state
-      </button>
       <MainOutControls
         setGain={setGain}
         gain={gain}

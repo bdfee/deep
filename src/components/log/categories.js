@@ -1,15 +1,17 @@
 import { useState } from 'react'
 
+const tempId = () => (Math.random() * 100).toFixed(0).toString()
+
 const Categories = ({ categories, setCategories, selectedCategory, setSelectedCategory }) => {
   const [text, setText] = useState('')
 
   const selectedStyle = { background: 'black', color: 'white' }
 
   const createCategory = () => {
-    const isCategoryExisting = categories.filter((category) => category === text)
-    console.log(isCategoryExisting)
+    const isCategoryExisting = categories.filter((category) => category.name === text)
     if (!isCategoryExisting.length) {
-      setCategories(categories.concat(text))
+      const newCategory = { name: text, id: tempId() }
+      setCategories(categories.concat(newCategory))
       setText('')
     }
   }
@@ -17,14 +19,15 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
   return (
     <>
       <div>
-        {categories.map((category) => {
+        {categories.map(({ name, id }) => {
           return (
             <button
-              style={selectedCategory === category ? selectedStyle : null}
-              key={category}
-              value={category}
-              onClick={({ target }) => setSelectedCategory(target.value)}>
-              {category}
+              style={selectedCategory.id === id ? selectedStyle : null}
+              key={id}
+              value={id}
+              name={name}
+              onClick={({ target }) => setSelectedCategory({ name: name, id: target.value })}>
+              {name}
             </button>
           )
         })}
