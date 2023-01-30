@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import categoryServices from '../../services/categories'
 
 const tempId = () => (Math.random() * 100).toFixed(0).toString()
 
@@ -9,10 +10,12 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
 
   const createCategory = () => {
     const isCategoryExisting = categories.filter((category) => category.name === text)
-    if (!isCategoryExisting.length) {
+    if (!isCategoryExisting.length && text.length > 0) {
       const newCategory = { name: text, id: tempId() }
-      setCategories(categories.concat(newCategory))
-      setText('')
+      categoryServices.create(newCategory).then((res) => {
+        setCategories(categories.concat(res.data))
+        setText('')
+      })
     }
   }
 
