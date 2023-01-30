@@ -1,7 +1,6 @@
 import { formatTime } from './log.helpers'
 
 const Items = ({ log, setLog }) => {
-  // console.log('item, log', log)
   const removeCategory = (categoryId) => setLog(log.filter(({ id }) => id !== categoryId))
 
   const removeEntry = (categoryId, entryIndex) => {
@@ -21,7 +20,6 @@ const Items = ({ log, setLog }) => {
   }
 
   return log.map(({ id, name, entries }) => {
-    // console.log('item, entries', entries)
     return (
       <ul key={id} id={id}>
         {name}

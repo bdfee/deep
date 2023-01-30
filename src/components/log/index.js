@@ -55,7 +55,6 @@ const Log = ({ isRunning, setIsRunning }) => {
     }
   }
 
-  console.log(log)
   return (
     <div>
       <h2>Log</h2>
