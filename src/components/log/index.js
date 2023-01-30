@@ -11,6 +11,7 @@ const Log = ({ isRunning, setIsRunning }) => {
 
   useEffect(() => {
     axios.get('http://localhost:3001/categories').then((res) => {
+      // extract category name and id
       setCategories(
         categories.concat(
           res.data.map((category) => {
@@ -18,7 +19,7 @@ const Log = ({ isRunning, setIsRunning }) => {
           })
         )
       )
-
+      // create date objects out of timestrings stored in db
       setLog(
         log.concat(
           res.data.map((category) => {
@@ -33,8 +34,6 @@ const Log = ({ isRunning, setIsRunning }) => {
       )
     })
   }, [])
-
-  console.log(categories)
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]

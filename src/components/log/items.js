@@ -2,17 +2,16 @@ import { formatTime } from './log.helpers'
 
 const Items = ({ log, setLog }) => {
   // console.log('item, log', log)
-  const removeCategory = (categoryId) =>
-    setLog(log.filter(({ category }) => category.id !== categoryId))
+  const removeCategory = (categoryId) => setLog(log.filter(({ id }) => id !== categoryId))
 
   const removeEntry = (categoryId, entryIndex) => {
-    const [item] = log.filter(({ category }) => category.id === categoryId)
+    const [item] = log.filter(({ id }) => id === categoryId)
     if (item.entries.length <= 1) {
       removeCategory(categoryId)
     } else {
       setLog(
         log.map((item) => {
-          if (item.category.id === categoryId) {
+          if (item.id === categoryId) {
             item.entries = item.entries.filter((_, index) => index !== Number(entryIndex))
           }
           return item
