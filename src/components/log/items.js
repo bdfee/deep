@@ -1,6 +1,7 @@
 import { formatTime } from './log.helpers'
 
 const Items = ({ log, setLog }) => {
+  // console.log('item, log', log)
   const removeCategory = (categoryId) =>
     setLog(log.filter(({ category }) => category.id !== categoryId))
 
@@ -20,10 +21,11 @@ const Items = ({ log, setLog }) => {
     }
   }
 
-  return log.map(({ category, entries }) => {
+  return log.map(({ id, name, entries }) => {
+    // console.log('item, entries', entries)
     return (
-      <ul key={category.id} id={category.id}>
-        {category.name}
+      <ul key={id} id={id}>
+        {name}
         <button
           onClick={({ target }) => {
             removeCategory(target.parentElement.id)
@@ -32,11 +34,11 @@ const Items = ({ log, setLog }) => {
         </button>
 
         {entries.map(([start, stop], index) => (
-          <li key={category.id + index} id={start}>
+          <li key={id + index} id={start}>
             {formatTime(stop - start)}
             <button
               value={index}
-              id={category.id}
+              id={id}
               onClick={({ target }) => {
                 removeEntry(target.id, target.value)
               }}>

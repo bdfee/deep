@@ -2,14 +2,7 @@ import { useState, useEffect } from 'react'
 import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
-
-const tempId = () => (Math.random() * 100).toFixed(2).toString()
-
-const tempCategoryList = [
-  { name: 'deep', id: tempId() },
-  { name: 'full stack open', id: tempId() },
-  { name: 'space fight', id: tempId() }
-]
+import axios from 'axios'
 
 const Log = ({ isRunning, setIsRunning }) => {
   const [log, setLog] = useState([])
@@ -17,33 +10,53 @@ const Log = ({ isRunning, setIsRunning }) => {
   const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    setCategories(tempCategoryList)
-    setSelectedCategory(tempCategoryList[0])
+    axios.get('http://localhost:3001/categories').then((res) => {
+      setCategories(
+        categories.concat(
+          res.data.map((category) => {
+            return { name: category.name, id: category.id }
+          })
+        )
+      )
+
+      setLog(
+        log.concat(
+          res.data.map((category) => {
+            category.entries.map((entry) => {
+              entry[0] = new Date(entry[0])
+              entry[1] = new Date(entry[1])
+              return entry
+            })
+            return category
+          })
+        )
+      )
+    })
   }, [])
+
+  console.log(categories)
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
-    const isExistingLogCategory = log.filter((item) => item.category.id === selectedCategory.id)
-    const [start, end] = newEntry
-
-    console.log('start', typeof start)
-    console.log('end', typeof end)
+    const isExistingLogCategory = log.filter((item) => item.id === selectedCategory.id)
     if (isExistingLogCategory.length) {
       setLog(
         log.map((item) => {
-          if (item.category.id === selectedCategory.id) item.entries.push(newEntry)
+          if (item.id === selectedCategory.id) item.entries.push(newEntry)
           return item
         })
       )
     } else {
       const newLogItem = {
-        category: selectedCategory,
+        name: selectedCategory.name,
+        id: selectedCategory.id,
         entries: [newEntry]
       }
       setLog(log.concat(newLogItem))
     }
   }
 
+  console.log(log)
   return (
     <div>
       <h2>Log</h2>
