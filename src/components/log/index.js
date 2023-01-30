@@ -24,7 +24,10 @@ const Log = ({ isRunning, setIsRunning }) => {
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
     const isExistingLogCategory = log.filter((item) => item.category.id === selectedCategory.id)
+    const [start, end] = newEntry
 
+    console.log('start', typeof start)
+    console.log('end', typeof end)
     if (isExistingLogCategory.length) {
       setLog(
         log.map((item) => {
