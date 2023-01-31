@@ -19,6 +19,10 @@ const Session = ({ isRunning, setIsRunning }) => {
     setCategories(categories.concat(tempCategories))
   }, [])
 
+  const logSession = () => {
+    console.log(items)
+  }
+
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
     const entryTime = newEntry[1] - newEntry[0]
@@ -44,9 +48,11 @@ const Session = ({ isRunning, setIsRunning }) => {
       setItems(items.concat(newLogItem))
     }
   }
+
   return (
     <div>
-      <h2>Log</h2>
+      <h2>Session</h2>
+      <button onClick={logSession}>log session</button>
       <h3>timer</h3>
       <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
       <h3>categories</h3>
