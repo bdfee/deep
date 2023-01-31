@@ -11,13 +11,7 @@ const create = (newCategory) => {
   return axios.post(baseUrl, newCategory)
 }
 
-const remove = (id) => {
-  const categoryUrl = `${baseUrl}/${id}`
-  return axios.delete(categoryUrl)
-}
-
 export default {
   getAll,
-  create,
-  remove
+  create
 }

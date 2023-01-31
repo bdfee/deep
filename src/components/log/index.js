@@ -1,26 +1,6 @@
-import { useState, useEffect } from 'react'
 import { formatTime } from '../utility'
-import logService from '../../services/log'
 
-const Log = () => {
-  const [log, setLog] = useState([])
-  useEffect(() => {
-    try {
-      logService.getAll().then((res) => {
-        res.data.map((session) => {
-          session.date = new Date(session.date)
-          session.items.map((item) => {
-            item.entries = item.entries.map(([start, stop]) => [new Date(start), new Date(stop)])
-            return item
-          })
-        })
-        setLog(res.data)
-      })
-    } catch (err) {
-      console.error(err)
-    }
-  }, [])
-
+const Log = ({ log }) => {
   return (
     <div>
       <h2>log</h2>

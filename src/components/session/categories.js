@@ -23,7 +23,7 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
       setCategories(categories.filter(({ id }) => id !== selectedCategory.id))
     }
   }
-  console.log(categories)
+
   return (
     <>
       <div>

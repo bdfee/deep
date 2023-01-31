@@ -7,7 +7,7 @@ import categoryService from '../../services/categories'
 
 const tempId = () => (Math.random() * 100).toFixed(0).toString()
 
-const Session = ({ isRunning, setIsRunning }) => {
+const Session = ({ isRunning, setIsRunning, log, setLog }) => {
   const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
@@ -24,7 +24,10 @@ const Session = ({ isRunning, setIsRunning }) => {
       date: new Date(),
       items: items
     }
-    logService.createSession(session).then((res) => console.log(res))
+    logService.createSession(session).then((res) => {
+      setLog(log.concat(res.data))
+      setItems([])
+    })
   }
 
   const createEntry = (entryStartTime) => {
