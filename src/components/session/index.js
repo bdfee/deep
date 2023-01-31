@@ -3,13 +3,7 @@ import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
 import logService from '../../services/log'
-
-const tempCategories = [
-  {
-    name: 'deep',
-    id: '1'
-  }
-]
+import categoryService from '../../services/categories'
 
 const tempId = () => (Math.random() * 100).toFixed(0).toString()
 
@@ -19,7 +13,9 @@ const Session = ({ isRunning, setIsRunning }) => {
   const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    setCategories(categories.concat(tempCategories))
+    categoryService.getAll().then((res) => {
+      setCategories(categories.concat(res.data))
+    })
   }, [])
 
   const logSession = () => {
@@ -48,7 +44,7 @@ const Session = ({ isRunning, setIsRunning }) => {
       )
     } else {
       const newItem = {
-        category: { name: 'deep', id: '1' },
+        category: { name: selectedCategory.name, id: selectedCategory.id },
         entries: [newEntry],
         totalTime: entryTime
       }
