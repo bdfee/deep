@@ -1,16 +1,11 @@
-import { formatTime } from './log.helpers'
-import sessionService from '../../services/session'
+import Entry from './entry'
 
 const Items = ({ items, setItems }) => {
   const removeItem = (categoryId) => {
-    sessionService.removeItem(categoryId).then((res) => {
-      if (res.status === 200) {
-        setItems(items.filter(({ id }) => id !== categoryId))
-      }
-    })
+    setItems(items.filter(({ id }) => id !== categoryId))
   }
 
-  const removeEntry = (categoryId, entryIndex) => {
+  const removeEntry = (categoryId, entryIndex, entryTime) => {
     const [item] = items.filter(({ id }) => id === categoryId)
     if (item.entries.length <= 1) {
       removeItem(categoryId)
@@ -18,7 +13,7 @@ const Items = ({ items, setItems }) => {
       const updatedItems = items.map((item) => {
         if (item.id === categoryId) {
           item.entries = item.entries.filter((_, index) => index !== Number(entryIndex))
-          sessionService.updateEntries(categoryId, item).then((res) => console.log(res))
+          item.totalTime -= entryTime
         }
         return item
       })
@@ -26,29 +21,24 @@ const Items = ({ items, setItems }) => {
     }
   }
 
-  return items.map(({ id, name, entries }) => {
+  return items.map(({ id, name, entries, totalTime }) => {
     return (
       <ul key={id} id={id}>
-        {name}
+        {name} {totalTime}
         <button
           onClick={({ target }) => {
             removeItem(target.parentElement.id)
           }}>
           remove
         </button>
-
-        {entries.map(([start, stop], index) => (
-          <li key={id + index} id={start}>
-            {formatTime(stop - start)}
-            <button
-              value={index}
-              id={id}
-              onClick={({ target }) => {
-                removeEntry(target.id, target.value)
-              }}>
-              remove
-            </button>
-          </li>
+        {entries.map((entry, index) => (
+          <Entry
+            key={id + index}
+            categoryId={id}
+            entry={entry}
+            index={index}
+            removeEntry={removeEntry}
+          />
         ))}
       </ul>
     )
