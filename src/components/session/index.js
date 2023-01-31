@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
+import logService from '../../services/log'
 
 const tempCategories = [
   {
@@ -9,6 +10,8 @@ const tempCategories = [
     id: '1'
   }
 ]
+
+const tempId = () => (Math.random() * 100).toFixed(0).toString()
 
 const Session = ({ isRunning, setIsRunning }) => {
   const [items, setItems] = useState([])
@@ -20,7 +23,12 @@ const Session = ({ isRunning, setIsRunning }) => {
   }, [])
 
   const logSession = () => {
-    console.log(items)
+    const session = {
+      id: tempId(),
+      date: new Date(),
+      items: items
+    }
+    logService.createSession(session).then((res) => console.log(res))
   }
 
   const createEntry = (entryStartTime) => {

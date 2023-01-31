@@ -1,36 +1,33 @@
 import { useState, useEffect } from 'react'
 import { formatTime } from '../utility'
-
-const tempLog = [
-  {
-    date: new Date(),
-    sessionNumber: 1,
-    items: [
-      {
-        category: { name: 'deep', id: '1' },
-        entries: [
-          [new Date('2023-01-31T19:31:45.999Z'), new Date('2023-01-31T19:31:47.139Z')],
-          [new Date('2023-01-31T19:31:47.737Z'), new Date('2023-01-31T19:31:48.872Z')],
-          [new Date('2023-01-31T19:31:49.475Z'), new Date('2023-01-31T19:31:50.863Z')]
-        ],
-        totalTime: 3663
-      }
-    ]
-  }
-]
+import logService from '../../services/log'
 
 const Log = () => {
   const [log, setLog] = useState([])
   useEffect(() => {
-    setLog(tempLog)
+    try {
+      logService.getAll().then((res) => {
+        res.data.map((session) => {
+          session.date = new Date(session.date)
+          session.items.map((item) => {
+            item.entries = item.entries.map(([start, stop]) => [new Date(start), new Date(stop)])
+            return item
+          })
+        })
+        setLog(res.data)
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }, [])
+
   return (
     <div>
-      <h3>log</h3>
+      <h2>log</h2>
       {log.map((session) => {
         return (
-          <div key={session.sessionNumber}>
-            <h4>{session.sessionNumber}</h4> {session.date.toLocaleString()}
+          <div key={session.id}>
+            <h4>{session.id}</h4> {session.date.toLocaleString()}
             {session.items.map((item) => {
               return (
                 <div key={item.category.id}>

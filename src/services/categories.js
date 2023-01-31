@@ -1,6 +1,8 @@
 import axios from 'axios'
 const baseUrl = 'http://localhost:3001/categories'
 
+// get all user categories from db
+
 const getAll = () => {
   return axios.get(baseUrl)
 }
