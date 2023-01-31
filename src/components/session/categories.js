@@ -19,6 +19,16 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
     }
   }
 
+  const removeCategory = () => {
+    if (selectedCategory.id) {
+      categoryServices.remove(selectedCategory.id).then((res) => {
+        if (res.status === 200) {
+          setCategories(categories.filter((category) => category.id !== selectedCategory.id))
+        }
+      })
+    }
+  }
+
   return (
     <>
       <div>
@@ -38,6 +48,7 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
       <div>
         <input type="text" value={text} onChange={({ target }) => setText(target.value)}></input>
         <button onClick={createCategory}>create category</button>
+        <button onClick={removeCategory}>remove category</button>
       </div>
     </>
   )

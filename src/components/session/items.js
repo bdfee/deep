@@ -2,15 +2,17 @@ import { formatTime } from './log.helpers'
 import sessionService from '../../services/session'
 
 const Items = ({ session, setSession }) => {
-  const removeCategory = (categoryId) => setSession(session.filter(({ id }) => id !== categoryId))
+  const removeCategory = (categoryId) => {
+    sessionService.removeItem(categoryId).then((res) => {
+      console.log(res)
+      setSession(session.filter(({ id }) => id !== categoryId))
+    })
+  }
 
   const removeEntry = (categoryId, entryIndex) => {
     const [item] = session.filter(({ id }) => id === categoryId)
     if (item.entries.length <= 1) {
-      sessionService.removeItem(categoryId).then((res) => {
-        console.log(res)
-        removeCategory(categoryId)
-      })
+      removeCategory(categoryId)
     } else {
       const updateEntries = session.map((item) => {
         if (item.id === categoryId) {
