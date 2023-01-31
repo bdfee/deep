@@ -2,8 +2,13 @@ import { useState, useEffect } from 'react'
 import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
-import categoriesService from '../../services/categories'
-import sessionService from '../../services/session'
+
+const tempCategories = [
+  {
+    name: 'deep',
+    id: '1'
+  }
+]
 
 const Session = ({ isRunning, setIsRunning }) => {
   const [items, setItems] = useState([])
@@ -11,58 +16,34 @@ const Session = ({ isRunning, setIsRunning }) => {
   const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    categoriesService.getAll().then((res) => {
-      setCategories(categories.concat(res.data))
-    })
-
-    sessionService.getAllItems().then((res) => {
-      if (res.data.length > 0) {
-        setItems(
-          items.concat(
-            res.data.map((category) => {
-              category.entries.map((entry) => {
-                entry[0] = new Date(entry[0])
-                entry[1] = new Date(entry[1])
-                return entry
-              })
-              return category
-            })
-          )
-        )
-      }
-    })
+    setCategories(categories.concat(tempCategories))
   }, [])
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
-    const isExistingLogCategory = items.filter((item) => item.id === selectedCategory.id)
+    const entryTime = newEntry[1] - newEntry[0]
+    const [isExistingItem] = items.filter((item) => item.id === selectedCategory.id)
 
-    if (isExistingLogCategory.length) {
-      const updatedItem = items.find((item) => item.id === selectedCategory.id)
-      updatedItem.entries.push(newEntry)
+    if (isExistingItem) {
+      isExistingItem.entries.push(newEntry)
+      isExistingItem.totalTime += entryTime
 
-      sessionService.updateEntries(selectedCategory.id, updatedItem).then(({ status }) => {
-        if (status === 200) {
-          setItems(
-            items.map((item) => {
-              if (item.id === selectedCategory.id) return updatedItem
-              else return item
-            })
-          )
-        }
-      })
+      setItems(
+        items.map((item) => {
+          if (item.id === selectedCategory.id) return isExistingItem
+          else return item
+        })
+      )
     } else {
       const newLogItem = {
         name: selectedCategory.name,
         id: selectedCategory.id,
-        entries: [newEntry]
+        entries: [newEntry],
+        totalTime: entryTime
       }
-      sessionService.createEntry(newLogItem).then(({ status }) => {
-        if (status === 201) setItems(items.concat(newLogItem))
-      })
+      setItems(items.concat(newLogItem))
     }
   }
-
   return (
     <div>
       <h2>Log</h2>
