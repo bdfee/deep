@@ -1,37 +1,38 @@
 import { formatTime } from './log.helpers'
 import sessionService from '../../services/session'
 
-const Items = ({ session, setSession }) => {
-  const removeCategory = (categoryId) => {
+const Items = ({ items, setItems }) => {
+  const removeItem = (categoryId) => {
     sessionService.removeItem(categoryId).then((res) => {
-      console.log(res)
-      setSession(session.filter(({ id }) => id !== categoryId))
+      if (res.status === 200) {
+        setItems(items.filter(({ id }) => id !== categoryId))
+      }
     })
   }
 
   const removeEntry = (categoryId, entryIndex) => {
-    const [item] = session.filter(({ id }) => id === categoryId)
+    const [item] = items.filter(({ id }) => id === categoryId)
     if (item.entries.length <= 1) {
-      removeCategory(categoryId)
+      removeItem(categoryId)
     } else {
-      const updateEntries = session.map((item) => {
+      const updatedItems = items.map((item) => {
         if (item.id === categoryId) {
           item.entries = item.entries.filter((_, index) => index !== Number(entryIndex))
           sessionService.updateEntries(categoryId, item).then((res) => console.log(res))
         }
         return item
       })
-      setSession(updateEntries)
+      setItems(updatedItems)
     }
   }
 
-  return session.map(({ id, name, entries }) => {
+  return items.map(({ id, name, entries }) => {
     return (
       <ul key={id} id={id}>
         {name}
         <button
           onClick={({ target }) => {
-            removeCategory(target.parentElement.id)
+            removeItem(target.parentElement.id)
           }}>
           remove
         </button>

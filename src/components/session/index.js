@@ -6,7 +6,7 @@ import categoriesService from '../../services/categories'
 import sessionService from '../../services/session'
 
 const Session = ({ isRunning, setIsRunning }) => {
-  const [session, setSession] = useState([])
+  const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
 
@@ -17,8 +17,8 @@ const Session = ({ isRunning, setIsRunning }) => {
 
     sessionService.getAllItems().then((res) => {
       if (res.data.length > 0) {
-        setSession(
-          session.concat(
+        setItems(
+          items.concat(
             res.data.map((category) => {
               category.entries.map((entry) => {
                 entry[0] = new Date(entry[0])
@@ -35,16 +35,16 @@ const Session = ({ isRunning, setIsRunning }) => {
 
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
-    const isExistingLogCategory = session.filter((item) => item.id === selectedCategory.id)
+    const isExistingLogCategory = items.filter((item) => item.id === selectedCategory.id)
 
     if (isExistingLogCategory.length) {
-      const updatedItem = session.find((item) => item.id === selectedCategory.id)
+      const updatedItem = items.find((item) => item.id === selectedCategory.id)
       updatedItem.entries.push(newEntry)
 
       sessionService.updateEntries(selectedCategory.id, updatedItem).then(({ status }) => {
         if (status === 200) {
-          setSession(
-            session.map((item) => {
+          setItems(
+            items.map((item) => {
               if (item.id === selectedCategory.id) return updatedItem
               else return item
             })
@@ -58,7 +58,7 @@ const Session = ({ isRunning, setIsRunning }) => {
         entries: [newEntry]
       }
       sessionService.createEntry(newLogItem).then(({ status }) => {
-        if (status === 201) setSession(session.concat(newLogItem))
+        if (status === 201) setItems(items.concat(newLogItem))
       })
     }
   }
@@ -76,7 +76,7 @@ const Session = ({ isRunning, setIsRunning }) => {
         setSelectedCategory={setSelectedCategory}
       />
       <h3>entries</h3>
-      <Items session={session} setSession={setSession} />
+      <Items items={items} setItems={setItems} />
     </div>
   )
 }
