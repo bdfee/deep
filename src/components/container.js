@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Session from './session/index'
 import AudioParameters from './audio/audio-parameters'
+import Log from './log/index'
 
 // container toggles between form and playing status
 
@@ -11,6 +12,7 @@ const Container = () => {
       <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
       <AudioParameters isRunning={isRunning} />
       <Session isRunning={isRunning} setIsRunning={setIsRunning} />
+      <Log />
     </div>
   )
 }
