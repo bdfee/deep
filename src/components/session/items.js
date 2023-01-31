@@ -1,17 +1,17 @@
-import Entry from './entry'
+import Item from './item'
 
 const Items = ({ items, setItems }) => {
   const removeItem = (categoryId) => {
-    setItems(items.filter(({ id }) => id !== categoryId))
+    setItems(items.filter(({ category }) => category.id !== categoryId))
   }
 
   const removeEntry = (categoryId, entryIndex, entryTime) => {
-    const [item] = items.filter(({ id }) => id === categoryId)
+    const [item] = items.filter(({ category }) => category.id === categoryId)
     if (item.entries.length <= 1) {
       removeItem(categoryId)
     } else {
       const updatedItems = items.map((item) => {
-        if (item.id === categoryId) {
+        if (item.category.id === categoryId) {
           item.entries = item.entries.filter((_, index) => index !== Number(entryIndex))
           item.totalTime -= entryTime
         }
@@ -21,28 +21,16 @@ const Items = ({ items, setItems }) => {
     }
   }
 
-  return items.map(({ id, name, entries, totalTime }) => {
-    return (
-      <ul key={id} id={id}>
-        {name} {totalTime}
-        <button
-          onClick={({ target }) => {
-            removeItem(target.parentElement.id)
-          }}>
-          remove
-        </button>
-        {entries.map((entry, index) => (
-          <Entry
-            key={id + index}
-            categoryId={id}
-            entry={entry}
-            index={index}
-            removeEntry={removeEntry}
-          />
-        ))}
-      </ul>
-    )
-  })
+  return items.map(({ category, entries, totalTime }) => (
+    <Item
+      key={category.id}
+      category={category}
+      entries={entries}
+      totalTime={totalTime}
+      removeItem={removeItem}
+      removeEntry={removeEntry}
+    />
+  ))
 }
 
 export default Items

@@ -7,8 +7,7 @@ const tempLog = [
     sessionNumber: 1,
     items: [
       {
-        categoryName: 'deep',
-        categoryId: '1',
+        category: { name: 'deep', id: '1' },
         entries: [
           [new Date('2023-01-31T19:31:45.999Z'), new Date('2023-01-31T19:31:47.139Z')],
           [new Date('2023-01-31T19:31:47.737Z'), new Date('2023-01-31T19:31:48.872Z')],
@@ -34,8 +33,8 @@ const Log = () => {
             <h4>{session.sessionNumber}</h4> {session.date.toLocaleString()}
             {session.items.map((item) => {
               return (
-                <div key={item.categoryId}>
-                  {item.categoryName} - {formatTime(item.totalTime)}
+                <div key={item.category.id}>
+                  {item.category.name} - {formatTime(item.totalTime)}
                 </div>
               )
             })}

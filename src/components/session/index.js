@@ -26,7 +26,7 @@ const Session = ({ isRunning, setIsRunning }) => {
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
     const entryTime = newEntry[1] - newEntry[0]
-    const [isExistingItem] = items.filter((item) => item.id === selectedCategory.id)
+    const [isExistingItem] = items.filter(({ category }) => category.id === selectedCategory.id)
 
     if (isExistingItem) {
       isExistingItem.entries.push(newEntry)
@@ -34,18 +34,17 @@ const Session = ({ isRunning, setIsRunning }) => {
 
       setItems(
         items.map((item) => {
-          if (item.id === selectedCategory.id) return isExistingItem
+          if (item.category.id === selectedCategory.id) return isExistingItem
           else return item
         })
       )
     } else {
-      const newLogItem = {
-        name: selectedCategory.name,
-        id: selectedCategory.id,
+      const newItem = {
+        category: { name: 'deep', id: '1' },
         entries: [newEntry],
         totalTime: entryTime
       }
-      setItems(items.concat(newLogItem))
+      setItems(items.concat(newItem))
     }
   }
 

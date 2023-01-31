@@ -1,4 +1,4 @@
-import { formatTime } from './log.helpers'
+import { formatTime } from '../utility'
 
 const Entry = ({ categoryId, entry, index, removeEntry }) => {
   const [start, stop] = entry
