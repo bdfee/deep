@@ -24,10 +24,21 @@ const Session = ({ isRunning, setIsRunning, log, setLog }) => {
       date: new Date(),
       items: items
     }
+
     logService.createSession(session).then((res) => {
       setLog(log.concat(res.data))
       setItems([])
     })
+
+    const updateCategories = categories.map((category) => {
+      if (!category.submitted) {
+        category.submitted = true
+        categoryService.updateSubmitted(category.id, category)
+      }
+      return category
+    })
+    setCategories(updateCategories)
+    setSelectedCategory('')
   }
 
   const createEntry = (entryStartTime) => {

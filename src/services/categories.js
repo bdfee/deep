@@ -11,7 +11,17 @@ const create = (newCategory) => {
   return axios.post(baseUrl, newCategory)
 }
 
+const remove = (id) => {
+  return axios.delete(`${baseUrl}/${id}`)
+}
+
+const updateSubmitted = (id, updatedCategory) => {
+  return axios.put(`${baseUrl}/${id}`, updatedCategory)
+}
+
 export default {
   getAll,
-  create
+  create,
+  updateSubmitted,
+  remove
 }
