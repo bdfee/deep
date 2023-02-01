@@ -66,8 +66,10 @@ const Session = ({ isRunning, setIsRunning, log, setLog }) => {
     }
   }
 
+  const tempStyle = { background: '#FAFAFA' }
+
   return (
-    <div>
+    <div style={tempStyle}>
       <h2>Session</h2>
       <button onClick={logSession}>log session</button>
       <h3>timer</h3>

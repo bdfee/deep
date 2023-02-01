@@ -83,8 +83,10 @@ const AudioParameters = ({ isRunning }) => {
     setIsActive(false)
   }
 
+  const tempStyle = { background: '#feeee8' }
+
   return (
-    <div>
+    <div style={tempStyle}>
       <h2>pink noise</h2>
       <MainOutControls
         setGain={setGain}

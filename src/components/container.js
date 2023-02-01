@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Session from './session/index'
-import AudioParameters from './audio/audio-parameters'
+import Audio from './audio/index'
 import Log from './log/index'
 import logService from '../services/log'
 
@@ -30,7 +30,7 @@ const Container = () => {
   return (
     <div>
       <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
-      <AudioParameters isRunning={isRunning} />
+      <Audio isRunning={isRunning} />
       <Session isRunning={isRunning} setIsRunning={setIsRunning} setLog={setLog} log={log} />
       <Log log={log} />
     </div>
