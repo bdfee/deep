@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import categoryService from '../../services/categories'
 
 const tempId = () => (Math.random() * 100).toFixed(0).toString()
 
@@ -9,29 +10,36 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
   const createCategory = () => {
     const isCategoryExisting = categories.filter(({ name }) => name === text)
     if (!isCategoryExisting.length && text.length > 0) {
-      const newCategory = { name: text, id: tempId() }
-      setCategories(categories.concat(newCategory))
-      setText('')
+      const newCategory = { name: text, id: tempId(), submitted: false }
+      categoryService.create(newCategory).then((res) => {
+        setCategories(categories.concat(res.data))
+        setText('')
+      })
     }
   }
 
   const removeCategory = () => {
     if (selectedCategory.id) {
-      setCategories(categories.filter(({ id }) => id !== selectedCategory.id))
+      categoryService.remove(selectedCategory.id).then((res) => {
+        if (res.status === 200) {
+          setCategories(categories.filter(({ id }) => id !== selectedCategory.id))
+          setSelectedCategory('')
+        }
+      })
     }
   }
 
   return (
     <>
       <div>
-        {categories.map(({ name, id }) => {
+        {categories.map(({ name, id, submitted }) => {
           return (
             <button
               style={selectedCategory.id === id ? selectedStyle : null}
               key={id}
               value={id}
               name={name}
-              onClick={({ target }) => setSelectedCategory({ name: name, id: target.value })}>
+              onClick={() => setSelectedCategory({ name: name, id: id, submitted: submitted })}>
               {name}
             </button>
           )
@@ -40,7 +48,11 @@ const Categories = ({ categories, setCategories, selectedCategory, setSelectedCa
       <div>
         <input type="text" value={text} onChange={({ target }) => setText(target.value)}></input>
         <button onClick={createCategory}>create category</button>
-        <button onClick={removeCategory}>remove category</button>
+        {selectedCategory.id && !selectedCategory.submitted ? (
+          <button onClick={removeCategory}>remove category</button>
+        ) : (
+          ''
+        )}
       </div>
     </>
   )

@@ -2,25 +2,43 @@ import { useState, useEffect } from 'react'
 import Categories from './categories'
 import Items from './items'
 import Timer from './timer/index'
+import logService from '../../services/log'
+import categoryService from '../../services/categories'
 
-const tempCategories = [
-  {
-    name: 'deep',
-    id: '1'
-  }
-]
+const tempId = () => (Math.random() * 100).toFixed(0).toString()
 
-const Session = ({ isRunning, setIsRunning }) => {
+const Session = ({ isRunning, setIsRunning, log, setLog }) => {
   const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    setCategories(categories.concat(tempCategories))
+    categoryService.getAll().then((res) => {
+      setCategories(categories.concat(res.data))
+    })
   }, [])
 
   const logSession = () => {
-    console.log(items)
+    const session = {
+      id: tempId(),
+      date: new Date(),
+      items: items
+    }
+
+    logService.createSession(session).then((res) => {
+      setLog(log.concat(res.data))
+      setItems([])
+    })
+
+    const updateCategories = categories.map((category) => {
+      if (!category.submitted) {
+        category.submitted = true
+        categoryService.updateSubmitted(category.id, category)
+      }
+      return category
+    })
+    setCategories(updateCategories)
+    setSelectedCategory('')
   }
 
   const createEntry = (entryStartTime) => {
@@ -40,7 +58,7 @@ const Session = ({ isRunning, setIsRunning }) => {
       )
     } else {
       const newItem = {
-        category: { name: 'deep', id: '1' },
+        category: { name: selectedCategory.name, id: selectedCategory.id },
         entries: [newEntry],
         totalTime: entryTime
       }
