@@ -1,7 +1,9 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 let categories = [
   {
@@ -48,7 +50,7 @@ let log = [
           ['2023-01-01T00:21:38.244Z', '2023-01-01T00:21:47.067Z'],
           ['2023-01-01T00:21:54.867Z', '2023-01-01T00:21:57.538Z']
         ],
-        totalTime: 11494
+        totalTime: '11494'
       }
     ]
   }
@@ -115,7 +117,7 @@ app.delete('/api/session/:id', (request, response) => {
   response.status(204).end()
 })
 
-app.post('/api/session', (response, request) => {
+app.post('/api/session', (request, response) => {
   const newItem = request.body
   session = session.concat(newItem)
   response.json(request.body)
@@ -123,10 +125,10 @@ app.post('/api/session', (response, request) => {
 
 app.put('/api/session/:id', (request, response) => {
   const id = request.params.id
-  const updatedEntries = request.body
+  const updatedItem = request.body
   session = session.map((item) => {
     if (item.category.id === id) {
-      item.entries = updatedEntries
+      item.entries = updatedItem.entries
     }
     return item
   })

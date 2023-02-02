@@ -44,15 +44,17 @@ const Session = ({ isRunning, setIsRunning, log, setLog }) => {
   const createEntry = (entryStartTime) => {
     const newEntry = [entryStartTime, new Date()]
     const entryTime = newEntry[1] - newEntry[0]
-    const [isExistingItem] = items.filter(({ category }) => category.id === selectedCategory.id)
+    const [isExistingSessionItem] = items.filter(
+      ({ category }) => category.id === selectedCategory.id
+    )
 
-    if (isExistingItem) {
-      isExistingItem.entries.push(newEntry)
-      isExistingItem.totalTime += entryTime
+    if (isExistingSessionItem) {
+      isExistingSessionItem.entries.push(newEntry)
+      isExistingSessionItem.totalTime += entryTime
 
       setItems(
         items.map((item) => {
-          if (item.category.id === selectedCategory.id) return isExistingItem
+          if (item.category.id === selectedCategory.id) return isExistingSessionItem
           else return item
         })
       )
