@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/categories'
+const baseUrl = 'http://localhost:3001/categories'
 
 // get all user categories from db
 
