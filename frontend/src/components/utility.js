@@ -1,5 +1,5 @@
 export const formatTime = (ms) => {
-  return new Date(ms).toISOString().slice(11, 19)
+  return new Date(ms).toISOString().slice(11, 22)
 }
 
 export const createDateObjs = (entry) => {

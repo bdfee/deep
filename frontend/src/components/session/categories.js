@@ -32,10 +32,12 @@ const Categories = ({
           setCategories(categories.filter(({ id }) => id !== selectedCategory.id))
           setSelectedCategory('')
 
-          itemService.deleteItem(selectedCategory.id).then(() => {
-            const updatedItems = items.filter(({ id }) => id !== selectedCategory.id)
-            setItems(updatedItems)
-          })
+          const updatedItems = items.filter(({ id }) => id !== selectedCategory.id)
+          if (updatedItems.length) {
+            itemService.deleteItem(selectedCategory.id).then(() => {
+              setItems(updatedItems)
+            })
+          }
         }
       })
     }

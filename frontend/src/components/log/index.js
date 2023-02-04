@@ -5,9 +5,10 @@ const Log = ({ log }) => {
     <div>
       <h2>log</h2>
       {log.map((session) => {
+        console.log(session)
         return (
           <div key={session.id}>
-            <h4>{session.id}</h4> {session.date}
+            <h4>{session.id}</h4> {new Date(session.date).toLocaleString()}
             {session.items.map((item) => {
               return (
                 <div key={item.id}>

@@ -6,8 +6,8 @@ const Item = ({ id, name, entries, totalTime, removeItem, removeEntry }) => {
       <h4>
         {name} {formatTime(totalTime)}
         <button
-          onClick={({ target }) => {
-            removeItem(target.parentElement.id)
+          onClick={() => {
+            removeItem(id)
           }}>
           remove
         </button>
