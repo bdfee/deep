@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/items'
+const baseUrl = 'http://localhost:3001/api/items'
 
 // get active session
 const getAll = () => {

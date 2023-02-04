@@ -1,7 +1,10 @@
-/* eslint-disable no-undef */
 const express = require('express')
 const cors = require('cors')
 const app = express()
+
+let categories = []
+let items = []
+let log = []
 
 app.use(express.json())
 app.use(cors())
@@ -33,7 +36,7 @@ app.get('/api/categories', (request, response) => {
 })
 
 app.delete('/api/categories/:id', (request, response) => {
-  const id = request.params.id
+  const id = Number(request.params.id)
   categories = categories.filter((category) => category.id !== id)
   response.status(204).end()
 })
@@ -45,39 +48,39 @@ app.post('/api/categories', (request, response) => {
 })
 
 app.put('/api/categories/:id', (request, response) => {
-  const id = request.params.id
+  const updatedCategory = request.body
+  const id = Number(request.params.id)
   categories = categories.map((category) => {
     if (category.id === id) {
-      category.submitted = true
-    }
-    return category
+      return updatedCategory
+    } else return category
   })
   response.json(request.body)
 })
 
 // items
 
-app.get('/api/session', (request, response) => {
-  response.json(session)
+app.get('/api/items', (request, response) => {
+  response.json(items)
 })
 
-app.delete('/api/session/:id', (request, response) => {
-  const categoryId = request.params.id
-  session = session.filter((item) => item.category.id !== categoryId)
+app.delete('/api/items/:id', (request, response) => {
+  const categoryId = Number(request.params.id)
+  items = items.filter((item) => item.id !== categoryId)
   response.status(204).end()
 })
 
-app.post('/api/session', (request, response) => {
+app.post('/api/items', (request, response) => {
   const newItem = request.body
-  session = session.concat(newItem)
+  items = items.concat(newItem)
   response.json(request.body)
 })
 
-app.put('/api/session/:id', (request, response) => {
-  const id = request.params.id
+app.put('/api/items/:id', (request, response) => {
+  const id = Number(request.params.id)
   const updatedItem = request.body
-  session = session.map((item) => {
-    if (item.category.id === id) {
+  items = items.map((item) => {
+    if (item.id === id) {
       item.entries = updatedItem.entries
     }
     return item
