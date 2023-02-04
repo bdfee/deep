@@ -3,35 +3,43 @@ import Session from './session/index'
 import Audio from './audio/index'
 import Log from './log/index'
 import logService from '../services/log'
-
+import { createDateObjs } from './utility'
 // container toggles between form and playing status
 
 const Container = () => {
   const [isRunning, setIsRunning] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [log, setLog] = useState([])
 
   useEffect(() => {
-    try {
-      logService.getAll().then((res) => {
-        res.data.map((session) => {
-          session.date = new Date(session.date)
-          session.items.map((item) => {
-            item.entries = item.entries.map(([start, stop]) => [new Date(start), new Date(stop)])
-            return item
-          })
+    logService.getAll().then((res) => {
+      const response = res.data.map((session) => {
+        session.items.map((item) => {
+          item.entries = item.entries.map((entry) => createDateObjs(entry))
         })
-        setLog(res.data)
+        return session
       })
-    } catch (err) {
-      console.error(err)
-    }
+      setLog(response)
+    })
   }, [])
 
   return (
     <div>
-      <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
+      {selectedCategory ? (
+        <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
+      ) : (
+        ''
+      )}
+
       <Audio isRunning={isRunning} />
-      <Session isRunning={isRunning} setIsRunning={setIsRunning} setLog={setLog} log={log} />
+      <Session
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
+        setLog={setLog}
+        log={log}
+        setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
       <Log log={log} />
     </div>
   )

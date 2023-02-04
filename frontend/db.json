@@ -1,35 +1,11 @@
 {
   "categories": [
     {
-      "name": "new category",
-      "id": "81",
-      "submitted": true
+      "name": "deep",
+      "id": 75,
+      "totalTime": 0
     }
   ],
-  "session": [],
-  "log": [
-    {
-      "id": "37",
-      "date": "2023-02-01T00:22:11.100Z",
-      "items": [
-        {
-          "category": {
-            "name": "new category",
-            "id": "81"
-          },
-          "entries": [
-            [
-              "2023-02-01T00:21:38.244Z",
-              "2023-02-01T00:21:47.067Z"
-            ],
-            [
-              "2023-02-01T00:21:54.867Z",
-              "2023-02-01T00:21:57.538Z"
-            ]
-          ],
-          "totalTime": 11494
-        }
-      ]
-    }
-  ]
+  "items": [],
+  "log": []
 }

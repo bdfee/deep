@@ -1,14 +1,13 @@
 import { formatTime } from '../utility'
 
-const Entry = ({ categoryId, entry, index, removeEntry }) => {
+const Entry = ({ id, entry, index, removeEntry }) => {
   const [start, stop] = entry
-
   return (
     <li>
       {formatTime(stop - start)}
       <button
         value={index}
-        id={categoryId}
+        id={id}
         onClick={({ target }) => {
           removeEntry(target.id, target.value, stop - start)
         }}>
