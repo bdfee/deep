@@ -1,15 +1,15 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/log'
+const baseUrl = 'http://localhost:3001/log'
 
 const getAll = () => {
   return axios.get(baseUrl)
 }
 
-const createSession = (session) => {
+const create = (session) => {
   return axios.post(baseUrl, session)
 }
 
 export default {
   getAll,
-  createSession
+  create
 }

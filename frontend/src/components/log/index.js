@@ -7,11 +7,11 @@ const Log = ({ log }) => {
       {log.map((session) => {
         return (
           <div key={session.id}>
-            <h4>{session.id}</h4> {session.date.toLocaleString()}
+            <h4>{session.id}</h4> {session.date}
             {session.items.map((item) => {
               return (
-                <div key={item.category.id}>
-                  {item.category.name} - {formatTime(item.totalTime)}
+                <div key={item.id}>
+                  {item.name} - {formatTime(item.totalTime)}
                 </div>
               )
             })}

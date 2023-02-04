@@ -1,60 +1,10 @@
+/* eslint-disable no-undef */
 const express = require('express')
 const cors = require('cors')
 const app = express()
 
 app.use(express.json())
 app.use(cors())
-
-let categories = [
-  {
-    name: 'deep',
-    id: '1',
-    submitted: true
-  },
-  {
-    name: 'space fight',
-    id: '2',
-    submitted: false
-  },
-  {
-    name: 'full stack open',
-    id: '3',
-    submitted: false
-  }
-]
-
-let session = [
-  {
-    category: {
-      name: 'deep',
-      id: '1'
-    },
-    entries: [
-      ['2023-02-01T00:21:38.244Z', '2023-02-01T00:21:47.067Z'],
-      ['2023-02-01T00:21:54.867Z', '2023-02-01T00:21:57.538Z']
-    ]
-  }
-]
-
-let log = [
-  {
-    id: '1',
-    date: '2023-02-01T00:22:11.100Z',
-    items: [
-      {
-        category: {
-          name: 'deep',
-          id: '1'
-        },
-        entries: [
-          ['2023-01-01T00:21:38.244Z', '2023-01-01T00:21:47.067Z'],
-          ['2023-01-01T00:21:54.867Z', '2023-01-01T00:21:57.538Z']
-        ],
-        totalTime: '11494'
-      }
-    ]
-  }
-]
 
 // middleware
 
@@ -105,7 +55,7 @@ app.put('/api/categories/:id', (request, response) => {
   response.json(request.body)
 })
 
-// session
+// items
 
 app.get('/api/session', (request, response) => {
   response.json(session)
@@ -135,6 +85,9 @@ app.put('/api/session/:id', (request, response) => {
   response.json(request.body)
 })
 
+app.post('/api/clear_session', (request, response) => {
+  console.log(request, response)
+})
 // log
 
 app.get('/api/log', (request, response) => {

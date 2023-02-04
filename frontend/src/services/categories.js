@@ -1,7 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/categories'
-
-// get all user categories from db
+const baseUrl = 'http://localhost:3001/categories'
 
 const getAll = () => {
   return axios.get(baseUrl)
@@ -15,13 +13,13 @@ const remove = (id) => {
   return axios.delete(`${baseUrl}/${id}`)
 }
 
-const updateSubmitted = (id, updatedCategory) => {
+const update = (id, updatedCategory) => {
   return axios.put(`${baseUrl}/${id}`, updatedCategory)
 }
 
 export default {
   getAll,
   create,
-  updateSubmitted,
+  update,
   remove
 }
