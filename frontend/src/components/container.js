@@ -8,6 +8,7 @@ import { createDateObjs } from './utility'
 
 const Container = () => {
   const [isRunning, setIsRunning] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [log, setLog] = useState([])
 
   useEffect(() => {
@@ -24,9 +25,21 @@ const Container = () => {
 
   return (
     <div>
-      <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
+      {selectedCategory ? (
+        <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
+      ) : (
+        ''
+      )}
+
       <Audio isRunning={isRunning} />
-      <Session isRunning={isRunning} setIsRunning={setIsRunning} setLog={setLog} log={log} />
+      <Session
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
+        setLog={setLog}
+        log={log}
+        setSelectedCategory={setSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
       <Log log={log} />
     </div>
   )

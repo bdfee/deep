@@ -1,5 +1,11 @@
 {
-  "categories": [],
+  "categories": [
+    {
+      "name": "deep",
+      "id": 75,
+      "totalTime": 0
+    }
+  ],
   "items": [],
   "log": []
 }

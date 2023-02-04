@@ -7,10 +7,16 @@ import categoryService from '../../services/categories'
 import itemService from '../../services/items'
 import { createDateObjs, tempId } from '../utility'
 
-const Session = ({ isRunning, setIsRunning, log, setLog }) => {
+const Session = ({
+  isRunning,
+  setIsRunning,
+  log,
+  setLog,
+  selectedCategory,
+  setSelectedCategory
+}) => {
   const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
     categoryService.getAll().then((res) => {
