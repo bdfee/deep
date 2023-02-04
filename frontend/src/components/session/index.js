@@ -54,7 +54,7 @@ const Session = ({
       // bulk delete route in express
 
       itemService.deleteItem(item.id).then(() => {
-        console.log('delete')
+        console.log('replace with bulk delete')
       })
       setSelectedCategory('')
     })

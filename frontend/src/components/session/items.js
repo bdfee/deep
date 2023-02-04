@@ -13,7 +13,6 @@ const Items = ({ items, setItems }) => {
 
   const removeEntry = (categoryId, entryIndex, entryTime) => {
     const [item] = items.filter(({ id }) => id === Number(categoryId))
-    console.log('remove item', item)
     if (item.entries.length <= 1) {
       removeItem(categoryId)
     } else {
@@ -22,7 +21,6 @@ const Items = ({ items, setItems }) => {
           item.entries = item.entries.filter((_, index) => index !== Number(entryIndex))
           item.totalTime -= entryTime
           itemService.updateItem(item.id, item).then((res) => {
-            console.log(res)
             res.data.entries = res.data.entries.map((entry) => createDateObjs(entry))
           })
         }
