@@ -5,7 +5,7 @@ import { createDateObjs } from '../utility'
 const Items = ({ items, setItems }) => {
   const removeItem = (categoryId) => {
     itemService.deleteItem(categoryId).then((res) => {
-      if (res.status === 200) {
+      if (res.status === 204) {
         setItems(items.filter(({ id }) => id !== Number(categoryId)))
       }
     })

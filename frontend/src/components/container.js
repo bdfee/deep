@@ -30,7 +30,6 @@ const Container = () => {
       ) : (
         ''
       )}
-
       <Audio isRunning={isRunning} />
       <Session
         isRunning={isRunning}

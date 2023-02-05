@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/items'
+const baseUrl = 'http://localhost:3001/api/items'
 
 // get active session
 const getAll = () => {
@@ -21,9 +21,15 @@ const updateItem = (id, itemEntries) => {
   return axios.put(`${baseUrl}/${id}`, itemEntries)
 }
 
+// delete all items
+const clearItems = (ids) => {
+  return axios.post(`${baseUrl}/clear`, ids)
+}
+
 export default {
   getAll,
   deleteItem,
   createItem,
-  updateItem
+  updateItem,
+  clearItems
 }

@@ -28,7 +28,7 @@ const Categories = ({
   const removeCategory = () => {
     if (selectedCategory.id) {
       categoryService.remove(selectedCategory.id).then((res) => {
-        if (res.status === 200) {
+        if (res.status === 204) {
           setCategories(categories.filter(({ id }) => id !== selectedCategory.id))
           setSelectedCategory('')
 
