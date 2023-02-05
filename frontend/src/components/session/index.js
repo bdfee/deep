@@ -42,7 +42,12 @@ const Session = ({
       setLog(log.concat(res.data))
     })
 
+    const ids = []
+
     items.map((item) => {
+      // push the id onto the array to be posted to bulk clear
+      ids.push(item.id)
+
       const [category] = categories.filter((category) => category.id === item.id)
       category.totalTime += item.totalTime
       categoryService.update(category.id, category).then((res) => {
@@ -50,16 +55,12 @@ const Session = ({
           categories.map((category) => (category.id === res.data.id ? res.data : category))
         )
       })
-
-      // bulk delete route in express
-
-      itemService.deleteItem(item.id).then(() => {
-        console.log('replace with bulk delete')
-      })
       setSelectedCategory('')
     })
 
-    setItems([])
+    itemService.clearItems(ids).then((res) => {
+      setItems(res.data)
+    })
   }
 
   const createEntry = (entryStartTime) => {
@@ -96,7 +97,6 @@ const Session = ({
   return (
     <div style={tempStyle}>
       <h2>Session</h2>
-      <button onClick={logSession}>log session</button>
       <h3>timer</h3>
       <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
       <h3>categories</h3>
@@ -110,6 +110,7 @@ const Session = ({
       />
       <h3>items</h3>
       <Items items={items} setItems={setItems} />
+      {items.length ? <button onClick={logSession}>log session</button> : ''}
     </div>
   )
 }

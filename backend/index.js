@@ -88,8 +88,10 @@ app.put('/api/items/:id', (request, response) => {
   response.json(request.body)
 })
 
-app.post('/api/clear_session', (request, response) => {
-  console.log(request, response)
+app.post('/api/items/clear', (request, response) => {
+  const idsArray = request.body
+  items = items.filter((item) => idsArray.includes(item.id) === false)
+  response.json(items)
 })
 // log
 
