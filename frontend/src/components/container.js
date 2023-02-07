@@ -3,6 +3,7 @@ import { BrowserView, MobileView } from 'react-device-detect'
 import Setup from './setup'
 import Audio from './audio/index'
 import Log from './log/index'
+import Categories from './categories'
 
 import Session from './session/index'
 
@@ -17,8 +18,7 @@ const Container = () => {
   const [log, setLog] = useState([])
   const [items, setItems] = useState([])
   const [categories, setCategories] = useState([])
-  const [showSession, setShowSession] = useState(false)
-  const [showLog, setShowLog] = useState(false)
+  const [showSection, setShowSection] = useState('')
 
   useEffect(() => {
     categoryService.getAll().then((res) => {
@@ -127,20 +127,27 @@ const Container = () => {
         <Session
           items={items}
           setItems={setItems}
-          showSession={showSession}
+          showSection={showSection}
           logSession={logSession}
         />
-        <Log log={log} showLog={showLog} />
+        <Log log={log} showSection={showSection} />
+        <Categories
+          showSection={showSection}
+          categories={categories}
+          setCategories={setCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          items={items}
+          setItems={setItems}
+        />
         {selectedCategory ? (
           <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
         ) : (
           ''
         )}
-        <div>
-          <button onClick={() => setShowSession(!showSession)}>session</button>
-          <button onClick={() => setShowLog(!showLog)}>log</button>
-          <button>categories</button>
-        </div>
+        <button onClick={() => setShowSection('session')}>session</button>
+        <button onClick={() => setShowSection('log')}>log</button>
+        <button onClick={() => setShowSection('categories')}>categories</button>
       </MobileView>
     </>
   )

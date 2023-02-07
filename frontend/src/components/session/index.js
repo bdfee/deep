@@ -2,7 +2,7 @@ import Item from './item'
 import itemService from '../../services/items'
 import { createDateObjs } from '../utility'
 
-const Session = ({ items, setItems, logSession, showSession }) => {
+const Session = ({ items, setItems, logSession, showSection }) => {
   const removeItem = (categoryId) => {
     itemService.deleteItem(categoryId).then((res) => {
       if (res.status === 204) {
@@ -30,7 +30,7 @@ const Session = ({ items, setItems, logSession, showSession }) => {
     }
   }
 
-  const display = { display: showSession ? 'block' : 'none' }
+  const display = { display: showSection === 'session' ? 'block' : 'none' }
 
   return (
     <div style={display}>

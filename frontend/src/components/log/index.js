@@ -1,7 +1,7 @@
 import { formatTime } from '../utility'
 
-const Log = ({ log, showLog }) => {
-  const display = { display: showLog ? 'block' : 'none' }
+const Log = ({ log, showSection }) => {
+  const display = { display: showSection === 'log' ? 'block' : 'none' }
   return (
     <div style={display}>
       <h2>log</h2>
