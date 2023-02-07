@@ -1,7 +1,7 @@
 const Categories = ({ categories, selectedCategory, setSelectedCategory }) => {
   const selectedStyle = { background: 'black', color: 'white' }
   return (
-    <div>
+    <div className="row">
       {categories.map(({ name, id, totalTime }) => {
         return (
           <button
@@ -10,7 +10,7 @@ const Categories = ({ categories, selectedCategory, setSelectedCategory }) => {
             value={id}
             name={name}
             onClick={() => setSelectedCategory({ name, id, totalTime })}>
-            {name} {totalTime}
+            {name}
           </button>
         )
       })}

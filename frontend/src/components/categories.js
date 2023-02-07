@@ -6,7 +6,6 @@ import itemService from '../services/items'
 const Categories = ({
   categories,
   setCategories,
-  selectedCategory,
   setSelectedCategory,
   items,
   setItems,
@@ -25,22 +24,21 @@ const Categories = ({
     }
   }
 
-  const removeCategory = () => {
-    if (selectedCategory.id) {
-      categoryService.remove(selectedCategory.id).then((res) => {
-        if (res.status === 204) {
-          setCategories(categories.filter(({ id }) => id !== selectedCategory.id))
-          setSelectedCategory('')
+  const removeCategory = (id) => {
+    const selectedId = Number(id)
+    categoryService.remove(selectedId).then((res) => {
+      if (res.status === 204) {
+        setCategories(categories.filter(({ id }) => id !== selectedId))
+        setSelectedCategory('')
 
-          const updatedItems = items.filter(({ id }) => id !== selectedCategory.id)
-          if (updatedItems.length) {
-            itemService.deleteItem(selectedCategory.id).then(() => {
-              setItems(updatedItems)
-            })
-          }
+        const updatedItems = items.filter(({ id }) => id !== selectedId)
+        if (updatedItems.length) {
+          itemService.deleteItem(selectedId).then(() => {
+            setItems(updatedItems)
+          })
         }
-      })
-    }
+      }
+    })
   }
   const display = { display: showSection === 'categories' ? 'block' : 'none' }
 
@@ -51,18 +49,18 @@ const Categories = ({
         {categories.map(({ name, id, totalTime }) => {
           return (
             <li key={id}>
-              {name} {totalTime}
+              {name} {totalTime}{' '}
+              {!totalTime ? (
+                <button onClick={() => removeCategory(id)}>remove category</button>
+              ) : (
+                ''
+              )}
             </li>
           )
         })}
       </ul>
       <input type="text" value={text} onChange={({ target }) => setText(target.value)}></input>
       <button onClick={createCategory}>create category</button>
-      {selectedCategory.id && !selectedCategory.totalTime ? (
-        <button onClick={removeCategory}>remove category</button>
-      ) : (
-        ''
-      )}
     </div>
   )
 }

@@ -33,7 +33,7 @@ const Session = ({ items, setItems, logSession, showSection }) => {
   const display = { display: showSection === 'session' ? 'block' : 'none' }
 
   return (
-    <div style={display}>
+    <div style={display} className="row">
       <h2>session</h2>
       {items.length ? <button onClick={logSession}>log session</button> : ''}
       {items.map(({ id, name, entries, totalTime }) => (

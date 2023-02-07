@@ -4,13 +4,14 @@ import Setup from './setup'
 import Audio from './audio/index'
 import Log from './log/index'
 import Categories from './categories'
-
 import Session from './session/index'
-
+import DisplayToggle from './display-toggle'
+import ActiveToggle from './active-toggle'
 import logService from '../services/log'
 import categoryService from '../services/categories'
 import itemService from '../services/items'
 import { createDateObjs, tempId } from './utility'
+import '../container.css'
 
 const Container = () => {
   const [isRunning, setIsRunning] = useState(false)
@@ -109,9 +110,8 @@ const Container = () => {
 
   return (
     <>
-      <BrowserView></BrowserView>
-      <MobileView>
-        this is mobile
+      <BrowserView>this is browser</BrowserView>
+      <MobileView className="mobile-grid">
         <Setup
           categories={categories}
           setCategories={setCategories}
@@ -140,14 +140,12 @@ const Container = () => {
           items={items}
           setItems={setItems}
         />
-        {selectedCategory ? (
-          <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
-        ) : (
-          ''
-        )}
-        <button onClick={() => setShowSection('session')}>session</button>
-        <button onClick={() => setShowSection('log')}>log</button>
-        <button onClick={() => setShowSection('categories')}>categories</button>
+        <ActiveToggle
+          selectedCategory={selectedCategory}
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+        />
+        <DisplayToggle setShowSection={setShowSection} showSection={showSection} />
       </MobileView>
     </>
   )

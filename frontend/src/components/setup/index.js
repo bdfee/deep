@@ -12,7 +12,7 @@ const Setup = ({
   isRunning,
   setIsRunning
 }) => {
-  const display = { display: isRunning ? 'none' : 'block', border: '2px solid black' }
+  const display = { display: isRunning ? 'none' : 'block' }
   return (
     <div style={display}>
       <Categories

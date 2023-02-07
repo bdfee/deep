@@ -1,0 +1,16 @@
+.grid {
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 5vh 50vh 15vh 25vh;
+  padding: 5px;
+}
+
+.row {
+  display: flex-wrap;
+  padding: 5px;
+  justify-content: space-evenly;
+}
+
+button {
+  width: auto;
+}
