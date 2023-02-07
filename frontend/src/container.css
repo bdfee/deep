@@ -1,0 +1,20 @@
+.mobile-grid {
+  display: grid;
+  grid-template-rows: 50vh 15vh 25vh;
+  grid-template-columns:auto;
+  padding: 5px;
+}
+
+.row {
+  border: 1px solid black;
+}
+
+.category-display {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.category-button {
+  height: 10vh;
+  font-size: 2vh;
+}
