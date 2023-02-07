@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { BrowserView, MobileView } from 'react-device-detect'
 import Session from './session/index'
 import Audio from './audio/index'
 import Log from './log/index'
@@ -24,23 +25,36 @@ const Container = () => {
   }, [])
 
   return (
-    <div>
-      {selectedCategory ? (
-        <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
-      ) : (
-        ''
-      )}
-      <Audio isRunning={isRunning} />
-      <Session
-        isRunning={isRunning}
-        setIsRunning={setIsRunning}
-        setLog={setLog}
-        log={log}
-        setSelectedCategory={setSelectedCategory}
-        selectedCategory={selectedCategory}
-      />
-      <Log log={log} />
-    </div>
+    <>
+      <BrowserView>
+        {selectedCategory ? (
+          <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
+        ) : (
+          ''
+        )}
+        <Audio isRunning={isRunning} />
+        <Session
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+          setLog={setLog}
+          log={log}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+        />
+        <Log log={log} />
+      </BrowserView>
+      <MobileView>
+        this is mobile
+        <Session
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+          setLog={setLog}
+          log={log}
+          setSelectedCategory={setSelectedCategory}
+          selectedCategory={selectedCategory}
+        />
+      </MobileView>
+    </>
   )
 }
 

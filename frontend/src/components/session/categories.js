@@ -12,7 +12,6 @@ const Categories = ({
   setItems
 }) => {
   const [text, setText] = useState('')
-  const selectedStyle = { background: 'black', color: 'white' }
 
   const createCategory = () => {
     const isCategoryExisting = categories.filter(({ name }) => name === text)
@@ -46,18 +45,20 @@ const Categories = ({
   return (
     <>
       <div>
-        {categories.map(({ name, id, totalTime }) => {
-          return (
-            <button
-              style={selectedCategory.id === id ? selectedStyle : null}
-              key={id}
-              value={id}
-              name={name}
-              onClick={() => setSelectedCategory({ name, id, totalTime })}>
-              {name} {totalTime}
-            </button>
-          )
-        })}
+        <select name="category" id="category-select">
+          <option value="">select category</option>
+          {categories.map(({ name, id, totalTime }) => {
+            return (
+              <option
+                key={id}
+                value={id}
+                name={name}
+                onSelect={() => setSelectedCategory({ name, id, totalTime })}>
+                {name}
+              </option>
+            )
+          })}
+        </select>
       </div>
       <div>
         <input type="text" value={text} onChange={({ target }) => setText(target.value)}></input>

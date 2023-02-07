@@ -97,8 +97,6 @@ const Session = ({
   return (
     <div style={tempStyle}>
       <h2>Session</h2>
-      <h3>timer</h3>
-      <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
       <h3>categories</h3>
       <Categories
         categories={categories}
@@ -108,6 +106,8 @@ const Session = ({
         items={items}
         setItems={setItems}
       />
+      <h3>timer</h3>
+      <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
       <h3>items</h3>
       <Items items={items} setItems={setItems} />
       {items.length ? <button onClick={logSession}>log session</button> : ''}
