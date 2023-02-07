@@ -1,116 +1,52 @@
-import { useState, useEffect } from 'react'
-import Categories from './categories'
-import Items from './items'
-import Timer from './timer/index'
-import logService from '../../services/log'
-import categoryService from '../../services/categories'
+import Item from './item'
 import itemService from '../../services/items'
-import { createDateObjs, tempId } from '../utility'
+import { createDateObjs } from '../utility'
 
-const Session = ({
-  isRunning,
-  setIsRunning,
-  log,
-  setLog,
-  selectedCategory,
-  setSelectedCategory
-}) => {
-  const [items, setItems] = useState([])
-  const [categories, setCategories] = useState([])
-
-  useEffect(() => {
-    categoryService.getAll().then((res) => {
-      setCategories(res.data)
+const Session = ({ items, setItems, logSession, showSession }) => {
+  const removeItem = (categoryId) => {
+    itemService.deleteItem(categoryId).then((res) => {
+      if (res.status === 204) {
+        setItems(items.filter(({ id }) => id !== Number(categoryId)))
+      }
     })
-    itemService.getAll().then((res) => {
-      const response = res.data.map((item) => {
-        item.entries = item.entries.map((entry) => createDateObjs(entry))
+  }
+
+  const removeEntry = (categoryId, entryIndex, entryTime) => {
+    const [item] = items.filter(({ id }) => id === Number(categoryId))
+    if (item.entries.length <= 1) {
+      removeItem(categoryId)
+    } else {
+      const updatedItems = items.map((item) => {
+        if (item.id === Number(categoryId)) {
+          item.entries = item.entries.filter((_, index) => index !== Number(entryIndex))
+          item.totalTime -= entryTime
+          itemService.updateItem(item.id, item).then((res) => {
+            res.data.entries = res.data.entries.map((entry) => createDateObjs(entry))
+          })
+        }
         return item
       })
-      setItems(response)
-    })
-  }, [])
-
-  const logSession = () => {
-    const session = {
-      id: tempId(),
-      date: new Date(),
-      items: items
-    }
-
-    logService.create(session).then((res) => {
-      setLog(log.concat(res.data))
-    })
-
-    const ids = []
-
-    items.map((item) => {
-      // push the id onto the array to be posted to bulk clear
-      ids.push(item.id)
-
-      const [category] = categories.filter((category) => category.id === item.id)
-      category.totalTime += item.totalTime
-      categoryService.update(category.id, category).then((res) => {
-        setCategories(
-          categories.map((category) => (category.id === res.data.id ? res.data : category))
-        )
-      })
-      setSelectedCategory('')
-    })
-
-    itemService.clearItems(ids).then((res) => {
-      setItems(res.data)
-    })
-  }
-
-  const createEntry = (entryStartTime) => {
-    const newEntry = [entryStartTime, new Date()]
-    const entryTime = newEntry[1] - newEntry[0]
-    const [existingItem] = items.filter(({ id }) => id === selectedCategory.id)
-    if (existingItem) {
-      existingItem.entries.push(newEntry)
-      existingItem.totalTime += entryTime
-      itemService.updateItem(existingItem.id, existingItem).then((res) => {
-        res.data.entries = res.data.entries.map((entry) => createDateObjs(entry))
-        setItems(
-          items.map((item) => {
-            if (item.id === res.data.id) return res.data
-            else return item
-          })
-        )
-      })
-    } else {
-      const newItem = {
-        id: selectedCategory.id,
-        name: selectedCategory.name,
-        entries: [newEntry],
-        totalTime: entryTime
-      }
-      itemService.createItem(newItem).then((res) => {
-        res.data.entries = res.data.entries.map((entry) => createDateObjs(entry))
-        setItems(items.concat(res.data))
-      })
+      setItems(updatedItems)
     }
   }
 
-  const tempStyle = { background: '#FAFAFA' }
+  const display = { display: showSession ? 'block' : 'none' }
+
   return (
-    <div style={tempStyle}>
-      <h2>Session</h2>
-      <h3>categories</h3>
-      <Categories
-        categories={categories}
-        setCategories={setCategories}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        items={items}
-        setItems={setItems}
-      />
-      <h3>timer</h3>
-      <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
-      <h3>items</h3>
-      <Items items={items} setItems={setItems} />
+    <div style={display}>
+      <h2>session</h2>
       {items.length ? <button onClick={logSession}>log session</button> : ''}
+      {items.map(({ id, name, entries, totalTime }) => (
+        <Item
+          key={id}
+          id={id}
+          name={name}
+          entries={entries}
+          totalTime={totalTime}
+          removeItem={removeItem}
+          removeEntry={removeEntry}
+        />
+      ))}
     </div>
   )
 }

@@ -83,7 +83,10 @@ const AudioParameters = ({ isRunning }) => {
     setIsActive(false)
   }
 
-  const tempStyle = { background: '#feeee8' }
+  const tempStyle = {
+    background: '#feeee8',
+    display: isRunning ? 'block' : 'none'
+  }
 
   return (
     <div style={tempStyle}>

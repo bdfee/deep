@@ -1,8 +1,9 @@
 import { formatTime } from '../utility'
 
-const Log = ({ log }) => {
+const Log = ({ log, showLog }) => {
+  const display = { display: showLog ? 'block' : 'none' }
   return (
-    <div>
+    <div style={display}>
       <h2>log</h2>
       {log.map((session) => {
         return (

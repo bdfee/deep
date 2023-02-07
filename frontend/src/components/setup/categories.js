@@ -41,24 +41,22 @@ const Categories = ({
       })
     }
   }
-
+  const selectedStyle = { background: 'black', color: 'white' }
   return (
     <>
       <div>
-        <select name="category" id="category-select">
-          <option value="">select category</option>
-          {categories.map(({ name, id, totalTime }) => {
-            return (
-              <option
-                key={id}
-                value={id}
-                name={name}
-                onSelect={() => setSelectedCategory({ name, id, totalTime })}>
-                {name}
-              </option>
-            )
-          })}
-        </select>
+        {categories.map(({ name, id, totalTime }) => {
+          return (
+            <button
+              style={selectedCategory.id === id ? selectedStyle : null}
+              key={id}
+              value={id}
+              name={name}
+              onClick={() => setSelectedCategory({ name, id, totalTime })}>
+              {name} {totalTime}
+            </button>
+          )
+        })}
       </div>
       <div>
         <input type="text" value={text} onChange={({ target }) => setText(target.value)}></input>

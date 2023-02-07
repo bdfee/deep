@@ -1,5 +1,5 @@
 const CountUp = () => {
-  return <div>count up</div>
+  return <div></div>
 }
 
 export default CountUp

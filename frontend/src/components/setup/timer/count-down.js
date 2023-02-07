@@ -25,7 +25,6 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs }) => {
 
   return (
     <div>
-      count down
       <input
         type="range"
         min={1}
