@@ -19,7 +19,7 @@ const audio = {
   }
 }
 
-const AudioParameters = ({ isRunning }) => {
+const AudioParameters = ({ isRunning, showSection }) => {
   // state parameters of ui, values used to rebuild the audio object in handleStart and map the filter components
   const [gain, setGain] = useState(0.5)
   const [isActive, setIsActive] = useState(false)
@@ -85,7 +85,7 @@ const AudioParameters = ({ isRunning }) => {
 
   const tempStyle = {
     background: '#feeee8',
-    display: isRunning ? 'block' : 'none'
+    display: showSection === 'audio' ? 'block' : 'none'
   }
 
   return (

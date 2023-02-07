@@ -1,6 +1,11 @@
-const ActiveToggle = ({ selectedCategory, isRunning, setIsRunning }) => {
+const ActiveToggle = ({ selectedCategory, isRunning, setIsRunning, setShowSection }) => {
+  const handleStart = () => {
+    setIsRunning(!isRunning)
+    setShowSection(!isRunning ? 'audio' : '')
+  }
+
   if (selectedCategory) {
-    return <button onClick={() => setIsRunning(!isRunning)}>{isRunning ? 'stop' : 'start'}</button>
+    return <button onClick={handleStart}>{isRunning ? 'stop' : 'start'}</button>
   }
 }
 

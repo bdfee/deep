@@ -112,40 +112,51 @@ const Container = () => {
     <>
       <BrowserView>this is browser</BrowserView>
       <MobileView className="mobile-grid">
-        <Setup
-          categories={categories}
-          setCategories={setCategories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          items={items}
-          setItems={setItems}
-          createEntry={createEntry}
-          isRunning={isRunning}
-          setIsRunning={setIsRunning}
-        />
-        <Audio isRunning={isRunning} />
-        <Session
-          items={items}
-          setItems={setItems}
-          showSection={showSection}
-          logSession={logSession}
-        />
-        <Log log={log} showSection={showSection} />
-        <Categories
-          showSection={showSection}
-          categories={categories}
-          setCategories={setCategories}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          items={items}
-          setItems={setItems}
-        />
-        <ActiveToggle
-          selectedCategory={selectedCategory}
-          isRunning={isRunning}
-          setIsRunning={setIsRunning}
-        />
-        <DisplayToggle setShowSection={setShowSection} showSection={showSection} />
+        <div className="category-display row">
+          {!showSection.length ? (
+            <Setup
+              categories={categories}
+              setCategories={setCategories}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              items={items}
+              setItems={setItems}
+              createEntry={createEntry}
+              isRunning={isRunning}
+              setIsRunning={setIsRunning}
+            />
+          ) : (
+            ''
+          )}
+          <Audio isRunning={isRunning} showSection={showSection} />
+          <Session
+            items={items}
+            setItems={setItems}
+            showSection={showSection}
+            logSession={logSession}
+          />
+          <Log log={log} showSection={showSection} />
+          <Categories
+            showSection={showSection}
+            categories={categories}
+            setCategories={setCategories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            items={items}
+            setItems={setItems}
+          />
+        </div>
+        <div className="row">
+          <ActiveToggle
+            selectedCategory={selectedCategory}
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
+            setShowSection={setShowSection}
+          />
+        </div>
+        <div className="row">
+          <DisplayToggle setShowSection={setShowSection} showSection={showSection} />
+        </div>
       </MobileView>
     </>
   )

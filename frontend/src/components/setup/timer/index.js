@@ -29,7 +29,7 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
   }
 
   return (
-    <div className="row">
+    <div>
       {!isActive ? (
         <button onClick={() => setToggleCountDown(!toggleCountDown)}>
           {toggleCountDown ? 'count down' : 'count up'}

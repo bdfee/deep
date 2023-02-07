@@ -1,10 +1,11 @@
 const Categories = ({ categories, selectedCategory, setSelectedCategory }) => {
   const selectedStyle = { background: 'black', color: 'white' }
   return (
-    <div className="row">
+    <div>
       {categories.map(({ name, id, totalTime }) => {
         return (
           <button
+            className="category-button"
             style={selectedCategory.id === id ? selectedStyle : null}
             key={id}
             value={id}
