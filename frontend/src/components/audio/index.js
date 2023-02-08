@@ -89,8 +89,23 @@ const AudioParameters = ({ isRunning, showSection }) => {
   }
 
   return (
-    <div style={tempStyle}>
-      <h2>pink noise</h2>
+    <div className="audio-controls" style={tempStyle}>
+      <div className="audio-tracks-container">
+        {trackParams.map((params) => {
+          return (
+            <PinkNoiseControls
+              key={params.id}
+              params={params}
+              trackFilterDefaults={filterDefaults[params.id]}
+              trackParams={trackParams}
+              setParams={setTrackParams}
+              trackNodes={audio.graph.tracks[params.id]}
+              context={audio.context}
+              isActive={isActive}
+            />
+          )
+        })}
+      </div>
       <MainOutControls
         setGain={setGain}
         gain={gain}
@@ -100,20 +115,6 @@ const AudioParameters = ({ isRunning, showSection }) => {
         context={audio.context}
         out={audio.graph.out}
       />
-      {trackParams.map((params) => {
-        return (
-          <PinkNoiseControls
-            key={params.id}
-            params={params}
-            trackFilterDefaults={filterDefaults[params.id]}
-            trackParams={trackParams}
-            setParams={setTrackParams}
-            trackNodes={audio.graph.tracks[params.id]}
-            context={audio.context}
-            isActive={isActive}
-          />
-        )
-      })}
     </div>
   )
 }

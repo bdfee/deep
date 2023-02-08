@@ -8,22 +8,28 @@ const MainOutControls = ({ gain, setGain, handleStart, handleStop, isActive, con
   }
 
   return (
-    <div>
+    <div className="audio-main-out">
       {!isActive ? (
-        <button onClick={() => handleStart()}>start</button>
+        <button className="audio-play-btn" onClick={() => handleStart()}>
+          play
+        </button>
       ) : (
-        <button onClick={() => handleStop()}>stop</button>
+        <button className="audio-play-btn" onClick={() => handleStop()}>
+          stop
+        </button>
       )}
-      <input
-        value={gain}
-        type="range"
-        min={0}
-        max={1}
-        step={0.01}
-        onChange={({ target }) => {
-          handleGain(Number(target.value))
-        }}></input>{' '}
-      gain - {gain}
+
+      <div className="audio-horizontal-range-container">
+        <input
+          value={gain}
+          type="range"
+          min={0}
+          max={1}
+          step={0.01}
+          onChange={({ target }) => {
+            handleGain(Number(target.value))
+          }}></input>
+      </div>
     </div>
   )
 }

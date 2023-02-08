@@ -1,3 +1,7 @@
+/* input[type="range"][orient="vert"] {
+  appearance: slider-vertical;
+} */
+
 .mobile-grid {
   display: grid;
   grid-template-rows: 65vh 10vh 15vh;
@@ -73,4 +77,30 @@
   flex-wrap: wrap;
   align-content: flex-start;
   align-items: center;
+}
+
+.audio-play-btn {
+  height: 10vh;
+  width: 20%;
+  font-size: 40px;
+}
+
+.audio-main-out{
+  row-gap: 30px;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.audio-tracks-container {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.audio-horizontal-range-container {
+  transform: scale(3)
 }

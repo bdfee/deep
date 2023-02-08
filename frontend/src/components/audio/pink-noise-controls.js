@@ -44,6 +44,7 @@ const PinkNoiseControls = ({
       <input
         type="range"
         name={'gain'}
+        orient="vert"
         min={0}
         max={0.7}
         step={0.01}
@@ -53,6 +54,7 @@ const PinkNoiseControls = ({
         }}></input>{' '}
       gain: {gain}
       <input
+        orient="vert"
         min={min}
         name={'highpassFreq'}
         max={max}
@@ -64,6 +66,7 @@ const PinkNoiseControls = ({
         }}></input>{' '}
       highpass: {highpassFreq}
       <input
+        orient="vert"
         min={min}
         max={max}
         name={'lowpassFreq'}
