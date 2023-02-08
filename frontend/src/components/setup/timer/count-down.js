@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
-const CountDown = ({ isActive, handleStopTimer, totalTimeInMs }) => {
+const CountDown = ({ isActive, handleStopTimer, totalTimeInMs, timeInMins, setTimeInMins }) => {
   const countToMsRef = useRef()
-  const [timeInMins, setTimeInMins] = useState(1)
 
   useEffect(() => {
     if (isActive) {
@@ -24,8 +23,9 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs }) => {
   }
 
   return (
-    <div>
+    <div className="timer-range-container">
       <input
+        className="timer-range"
         type="range"
         min={1}
         max={120}
@@ -34,7 +34,6 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs }) => {
         onChange={({ target }) => {
           handleSetTime(target.value)
         }}></input>
-      {timeInMins}
     </div>
   )
 }
