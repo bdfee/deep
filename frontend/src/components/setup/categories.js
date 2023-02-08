@@ -1,7 +1,7 @@
 const Categories = ({ categories, selectedCategory, setSelectedCategory }) => {
   const selectedStyle = { background: 'black', color: 'white' }
   return (
-    <div>
+    <div className="category-setup">
       {categories.map(({ name, id, totalTime }) => {
         return (
           <button

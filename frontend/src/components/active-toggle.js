@@ -5,7 +5,11 @@ const ActiveToggle = ({ selectedCategory, isRunning, setIsRunning, setShowSectio
   }
 
   if (selectedCategory) {
-    return <button onClick={handleStart}>{isRunning ? 'stop' : 'start'}</button>
+    return (
+      <button className="start-btn" onClick={handleStart}>
+        {isRunning ? 'stop' : 'start'}
+      </button>
+    )
   }
 }
 

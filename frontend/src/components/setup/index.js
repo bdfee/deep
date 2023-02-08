@@ -3,25 +3,20 @@ import Timer from './timer'
 
 const Setup = ({
   categories,
-  setCategories,
   selectedCategory,
   setSelectedCategory,
-  items,
-  setItems,
+  showSection,
   createEntry,
   isRunning,
   setIsRunning
 }) => {
-  const display = { display: isRunning ? 'none' : 'block' }
+  const display = { display: showSection.length ? 'none' : 'block' }
   return (
     <div style={display}>
       <Categories
         categories={categories}
-        setCategories={setCategories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
-        items={items}
-        setItems={setItems}
       />
       <Timer createEntry={createEntry} isRunning={isRunning} setIsRunning={setIsRunning} />
     </div>

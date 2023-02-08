@@ -107,27 +107,24 @@ const Container = () => {
       })
     }
   }
-
+  console.log('container', isRunning)
   return (
     <>
       <BrowserView>this is browser</BrowserView>
       <MobileView className="mobile-grid">
         <div className="category-display row">
-          {!showSection.length ? (
-            <Setup
-              categories={categories}
-              setCategories={setCategories}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              items={items}
-              setItems={setItems}
-              createEntry={createEntry}
-              isRunning={isRunning}
-              setIsRunning={setIsRunning}
-            />
-          ) : (
-            ''
-          )}
+          <Setup
+            showSection={showSection}
+            categories={categories}
+            setCategories={setCategories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            items={items}
+            setItems={setItems}
+            createEntry={createEntry}
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
+          />
           <Audio isRunning={isRunning} showSection={showSection} />
           <Session
             items={items}
@@ -146,7 +143,7 @@ const Container = () => {
             setItems={setItems}
           />
         </div>
-        <div className="row">
+        <div className="start row">
           <ActiveToggle
             selectedCategory={selectedCategory}
             isRunning={isRunning}

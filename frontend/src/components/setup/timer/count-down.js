@@ -34,7 +34,7 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs }) => {
         onChange={({ target }) => {
           handleSetTime(target.value)
         }}></input>
-      {timeInMins} minutes
+      {timeInMins}
     </div>
   )
 }
