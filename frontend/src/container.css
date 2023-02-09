@@ -181,3 +181,42 @@ ul {
 .entry-name {
   width: 50%
 }
+
+.category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 40px;
+  height: 5vh;
+  border: solid 1px black;
+}
+
+.category-name {
+  width: 50%;
+  padding-left: 10px;
+}
+
+.category-remove {
+  width: 15%
+}
+
+.category-btn {
+  height: 5vh;
+  width: 100%;
+  font-size: 2vh;
+}
+
+.category-create {
+  font-size: 2vh;
+}
+
+.category-create-input {
+  height: 5vh;
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+.category-create-row {
+  display: flex;
+}

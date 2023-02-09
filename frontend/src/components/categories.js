@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import categoryService from '../services/categories'
-import { tempId } from './utility'
+import { tempId, formatTime } from './utility'
 import itemService from '../services/items'
 
 const Categories = ({
@@ -44,23 +44,37 @@ const Categories = ({
 
   return (
     <div style={display}>
-      <h2>categories</h2>
-      <ul>
+      <div>
         {categories.map(({ name, id, totalTime }) => {
           return (
-            <li key={id}>
-              {name} {totalTime}{' '}
-              {!totalTime ? (
-                <button onClick={() => removeCategory(id)}>remove category</button>
-              ) : (
-                ''
-              )}
-            </li>
+            <div key={id} className="category">
+              <div className="category-name">
+                <b>{name}</b>
+              </div>
+              <div>{formatTime(totalTime)}</div>
+              <div className="category-remove">
+                {!totalTime ? (
+                  <button className="category-btn" onClick={() => removeCategory(id)}>
+                    remove
+                  </button>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
           )
         })}
-      </ul>
-      <input type="text" value={text} onChange={({ target }) => setText(target.value)}></input>
-      <button onClick={createCategory}>create category</button>
+      </div>
+      <div className="category-create-row">
+        <input
+          type="text"
+          value={text}
+          onChange={({ target }) => setText(target.value)}
+          className="category-create-input"></input>
+        <button onClick={createCategory} className="category-create">
+          create
+        </button>
+      </div>
     </div>
   )
 }
