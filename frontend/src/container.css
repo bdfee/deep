@@ -1,6 +1,71 @@
-/* input[type="range"][orient="vert"] {
+input[type="range"][orient="vert"] {
   appearance: slider-vertical;
-} */
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  width: 60px;
+}
+
+input[type="range"]{
+  appearance: none;
+  margin: 0px;
+}
+/* audio */
+
+.audio-play-btn {
+  height: 10vh;
+  width: 20%;
+  font-size: 40px;
+}
+
+.audio-main-out{
+  row-gap: 30px;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.audio-tracks-container {
+  height: 45vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.audio-vertical-range-container {
+  border: solid black;
+  transform: scale(3);
+  flex-basis: auto;
+}
+
+.audio-vertical-range-label {
+  text-align: center;
+  margin-top: 20px;
+  width: 60px;
+}
+
+.audio-horizontal-range-container {
+  transform: scale(3) ;
+  margin-top: 10px;
+}
+
+.filter-range {
+  transform: scale(2.5)
+}
+
+.filter-range-reverse {
+  transform: scale(2.5) rotate(180DEG);
+  margin-bottom: 20px;
+}
+
+.audio-filter-controls {
+  align-content: center;
+  justify-content: space-evenly;
+  min-height: 5vh;
+  align-items: center;
+}
 
 .mobile-grid {
   display: grid;
@@ -77,30 +142,4 @@
   flex-wrap: wrap;
   align-content: flex-start;
   align-items: center;
-}
-
-.audio-play-btn {
-  height: 10vh;
-  width: 20%;
-  font-size: 40px;
-}
-
-.audio-main-out{
-  row-gap: 30px;
-  height: 15vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-}
-
-.audio-tracks-container {
-  height: 50vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.audio-horizontal-range-container {
-  transform: scale(3)
 }
