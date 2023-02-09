@@ -6,6 +6,7 @@ const Entry = ({ id, entry, index, removeEntry }) => {
     <li>
       {formatTime(stop - start)}
       <button
+        className="entry-btn"
         value={index}
         id={id}
         onClick={({ target }) => {
