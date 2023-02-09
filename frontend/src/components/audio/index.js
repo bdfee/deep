@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
 import MainOutControls from './main-out-controls'
+
 import {
   createAudioNodes,
   createPinkNoiseAudioBuffer,
   setAudioNodeParams,
   connectAudioNodes
 } from './audio.helpers'
+import TracksFilterToggle from './tracks-filter-toggle'
 
 // will try to one once on load, cannot initialize before user action per web audio
 const audioContext = new AudioContext()
@@ -106,6 +108,18 @@ const AudioParameters = ({ isRunning, showSection }) => {
                 context={audio.context}
               />
             </div>
+          )
+        })}
+      </div>
+      <div className="audio-vertical-range-label">
+        {trackParams.map((params) => {
+          return (
+            <TracksFilterToggle
+              key={params.id}
+              showFilter={showFilter}
+              setShowFilter={setShowFilter}
+              params={params}
+            />
           )
         })}
       </div>

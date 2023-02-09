@@ -1,12 +1,4 @@
-const TracksGain = ({
-  params,
-  trackParams,
-  setParams,
-  trackNodes,
-  context,
-  showFilter,
-  setShowFilter
-}) => {
+const TracksGain = ({ params, trackParams, setParams, trackNodes, context }) => {
   // handler (audio and state) and ui
   const { id, gain } = params
 
@@ -37,10 +29,6 @@ const TracksGain = ({
     setParams(newState)
   }
 
-  const selectStyle = {
-    background: showFilter === id ? 'black' : 'transparent',
-    color: showFilter === id ? 'white' : 'black'
-  }
   return (
     <div className="audio-vertical-range-container" id={id}>
       <input
@@ -54,14 +42,6 @@ const TracksGain = ({
         onChange={(e) => {
           handleSetParams(e)
         }}></input>
-      <div
-        style={selectStyle}
-        className="audio-vertical-range-label"
-        onClick={() => {
-          setShowFilter(showFilter === id ? '' : id)
-        }}>
-        {id}
-      </div>
     </div>
   )
 }
