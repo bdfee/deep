@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
-import PinkNoiseControls from './pink-noise-controls'
+import TracksGain from './tracks-gain'
+import TracksFilter from './tracks-filter'
 import MainOutControls from './main-out-controls'
+
 import {
   createAudioNodes,
   createPinkNoiseAudioBuffer,
   setAudioNodeParams,
   connectAudioNodes
 } from './audio.helpers'
+import TracksFilterToggle from './tracks-filter-toggle'
 
 // will try to one once on load, cannot initialize before user action per web audio
 const audioContext = new AudioContext()
@@ -23,6 +26,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
   // state parameters of ui, values used to rebuild the audio object in handleStart and map the filter components
   const [gain, setGain] = useState(0.5)
   const [isActive, setIsActive] = useState(false)
+  const [showFilter, setShowFilter] = useState('lowPink')
   const [trackParams, setTrackParams] = useState([
     {
       id: 'lowPink',
@@ -89,8 +93,51 @@ const AudioParameters = ({ isRunning, showSection }) => {
   }
 
   return (
-    <div style={tempStyle}>
-      <h2>pink noise</h2>
+    <div className="audio-controls" style={tempStyle}>
+      <div className="audio-tracks-container">
+        {trackParams.map((params) => {
+          return (
+            <div key={params.id}>
+              <TracksGain
+                showFilter={showFilter}
+                setShowFilter={setShowFilter}
+                params={params}
+                trackParams={trackParams}
+                setParams={setTrackParams}
+                trackNodes={audio.graph.tracks[params.id]}
+                context={audio.context}
+              />
+            </div>
+          )
+        })}
+      </div>
+      <div className="audio-vertical-range-label">
+        {trackParams.map((params) => {
+          return (
+            <TracksFilterToggle
+              key={params.id}
+              showFilter={showFilter}
+              setShowFilter={setShowFilter}
+              params={params}
+            />
+          )
+        })}
+      </div>
+      {trackParams.map((params) => {
+        return (
+          <div key={params.id}>
+            <TracksFilter
+              showFilter={showFilter}
+              params={params}
+              trackFilterDefaults={filterDefaults[params.id]}
+              trackParams={trackParams}
+              setParams={setTrackParams}
+              trackNodes={audio.graph.tracks[params.id]}
+              context={audio.context}
+            />
+          </div>
+        )
+      })}
       <MainOutControls
         setGain={setGain}
         gain={gain}
@@ -100,20 +147,6 @@ const AudioParameters = ({ isRunning, showSection }) => {
         context={audio.context}
         out={audio.graph.out}
       />
-      {trackParams.map((params) => {
-        return (
-          <PinkNoiseControls
-            key={params.id}
-            params={params}
-            trackFilterDefaults={filterDefaults[params.id]}
-            trackParams={trackParams}
-            setParams={setTrackParams}
-            trackNodes={audio.graph.tracks[params.id]}
-            context={audio.context}
-            isActive={isActive}
-          />
-        )
-      })}
     </div>
   )
 }

@@ -6,6 +6,7 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
   const [isActive, setIsActive] = useState(false)
   const [entryStartTime, setEntryStartTime] = useState({})
   const [toggleCountDown, setToggleCountDown] = useState(false)
+  const [timeInMins, setTimeInMins] = useState(1)
 
   useEffect(() => {
     console.log(isRunning)
@@ -34,7 +35,7 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
     <div className="timer-setup">
       {!isActive ? (
         <button className="timer-toggle" onClick={() => setToggleCountDown(!toggleCountDown)}>
-          {toggleCountDown ? 'count down' : 'count up'}
+          {toggleCountDown ? `${timeInMins} minutes` : 'count up'}
         </button>
       ) : (
         ''
@@ -44,6 +45,8 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
           isActive={isActive}
           handleStopTimer={handleStopTimer}
           totalTimeInMs={totalTimeInMs}
+          timeInMins={timeInMins}
+          setTimeInMins={setTimeInMins}
         />
       ) : (
         <CountUp />
