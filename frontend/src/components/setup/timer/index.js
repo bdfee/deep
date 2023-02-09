@@ -9,7 +9,6 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
   const [timeInMins, setTimeInMins] = useState(1)
 
   useEffect(() => {
-    console.log(isRunning)
     !isRunning ? handleStopTimer() : handleStartTimer()
   }, [isRunning])
 
@@ -24,7 +23,6 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
 
   const handleStopTimer = () => {
     if (isActive) {
-      console.log('here')
       createEntry(entryStartTime)
       setIsRunning(false)
       setIsActive(false)

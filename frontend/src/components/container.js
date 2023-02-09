@@ -107,7 +107,6 @@ const Container = () => {
       })
     }
   }
-  console.log('container', isRunning)
   return (
     <>
       <BrowserView>this is browser</BrowserView>

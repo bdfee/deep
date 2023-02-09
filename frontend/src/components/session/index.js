@@ -34,8 +34,13 @@ const Session = ({ items, setItems, logSession, showSection }) => {
 
   return (
     <div style={display} className="row">
-      <h2>session</h2>
-      {items.length ? <button onClick={logSession}>log session</button> : ''}
+      {items.length ? (
+        <button onClick={logSession} className="entry-btn">
+          log session
+        </button>
+      ) : (
+        ''
+      )}
       {items.map(({ id, name, entries, totalTime }) => (
         <Item
           key={id}
