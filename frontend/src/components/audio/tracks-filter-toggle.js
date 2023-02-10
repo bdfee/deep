@@ -8,6 +8,7 @@ const TracksFilterToggle = ({ showFilter, setShowFilter, params }) => {
 
   return (
     <div
+      className="filter-toggle"
       style={selectStyle}
       onClick={() => {
         setShowFilter(showFilter === id ? '' : id)

@@ -51,7 +51,7 @@ const TracksFilter = ({
     <div className="audio-filter-controls" style={display}>
       <div className="filter-range-reverse" id={id}>
         <input
-          className="slider"
+          orient="horizontal"
           min={min}
           name={'highpassFreq'}
           max={max}
@@ -66,6 +66,7 @@ const TracksFilter = ({
         <input
           min={min}
           max={max}
+          orient="horizontal"
           name={'lowpassFreq'}
           step={1}
           type="range"
