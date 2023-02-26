@@ -49,7 +49,7 @@ const Container = () => {
   const logSession = () => {
     const session = {
       id: tempId(),
-      date: new Date(),
+      date: new Date().toLocaleDateString(),
       items: items
     }
 
