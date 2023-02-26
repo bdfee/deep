@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
 import MainOutControls from './main-out-controls'
+import { isMobile } from 'react-device-detect'
 
 import {
   createAudioNodes,
@@ -92,9 +93,11 @@ const AudioParameters = ({ isRunning, showSection }) => {
     display: showSection === 'audio' ? 'block' : 'none'
   }
 
+  const mobileClass = isMobile ? '-mobile' : ''
+
   return (
     <div className="audio-controls" style={tempStyle}>
-      <div className="audio-tracks-container">
+      <div className={`audio-tracks-container${mobileClass}`}>
         {trackParams.map((params) => {
           return (
             <div key={params.id}>
@@ -111,7 +114,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
           )
         })}
       </div>
-      <div className="audio-filter-label-row">
+      <div className={`audio-filter-label-row${mobileClass}`}>
         {trackParams.map((params) => {
           return (
             <TracksFilterToggle

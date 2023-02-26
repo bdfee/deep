@@ -1,3 +1,5 @@
+import { isMobile } from 'react-device-detect'
+
 const MainOutControls = ({ gain, setGain, handleStart, handleStop, isActive, context, out }) => {
   // handler (audio and state) and ui
   const handleGain = (value) => {
@@ -7,22 +9,24 @@ const MainOutControls = ({ gain, setGain, handleStart, handleStop, isActive, con
     setGain(value)
   }
 
+  const mobileClass = isMobile ? '-mobile' : ''
+
   return (
-    <div className="audio-main-out">
+    <div className={`audio-main-out${mobileClass}`}>
       {!isActive ? (
-        <button className="audio-play-btn" onClick={() => handleStart()}>
+        <button className={`audio-play-btn${mobileClass}`} onClick={() => handleStart()}>
           play
         </button>
       ) : (
-        <button className="audio-play-btn" onClick={() => handleStop()}>
+        <button className={`audio-play-btn${mobileClass}`} onClick={() => handleStop()}>
           stop
         </button>
       )}
 
-      <div className="audio-horizontal-range-container">
+      <div className={`audio-horizontal-range-container${mobileClass}`}>
         <input
           value={gain}
-          orient="horizontal"
+          orient={`horizontal${mobileClass}`}
           type="range"
           min={0}
           max={1}

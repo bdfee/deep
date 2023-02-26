@@ -1,3 +1,5 @@
+import { isMobile } from 'react-device-detect'
+
 const TracksGain = ({ params, trackParams, setParams, trackNodes, context }) => {
   // handler (audio and state) and ui
   const { id, gain } = params
@@ -29,12 +31,14 @@ const TracksGain = ({ params, trackParams, setParams, trackNodes, context }) => 
     setParams(newState)
   }
 
+  const mobileClass = isMobile ? '-mobile' : ''
+
   return (
-    <div className="audio-vertical-range-container" id={id}>
+    <div className={`audio-vertical-range-container${mobileClass}`} id={id}>
       <input
         type="range"
         name={'gain'}
-        orient="vert"
+        orient={`vert${mobileClass}`}
         min={0}
         max={0.7}
         step={0.01}

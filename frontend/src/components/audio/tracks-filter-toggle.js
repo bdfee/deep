@@ -1,3 +1,5 @@
+import { isMobile } from 'react-device-detect'
+
 const TracksFilterToggle = ({ showFilter, setShowFilter, params }) => {
   const { id } = params
 
@@ -6,9 +8,11 @@ const TracksFilterToggle = ({ showFilter, setShowFilter, params }) => {
     color: showFilter === id ? 'white' : 'black'
   }
 
+  const mobileClass = isMobile ? '-mobile' : ''
+
   return (
     <div
-      className="filter-toggle"
+      className={`filter-toggle${mobileClass}`}
       style={selectStyle}
       onClick={() => {
         setShowFilter(showFilter === id ? '' : id)

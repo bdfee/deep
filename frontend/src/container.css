@@ -1,4 +1,4 @@
-input[type="range"][orient="vert"] {
+input[type="range"][orient="vert-mobile"] {
   appearance: none;
   transform: rotate(0DEG);
   margin: 0 0 0 0;
@@ -7,7 +7,7 @@ input[type="range"][orient="vert"] {
   height: 11px;
 }
 
-input[type="range"][orient="horizontal"]{
+input[type="range"][orient="horizontal-mobile"]{
   appearance: none;
   border: solid;
 }
@@ -24,13 +24,13 @@ ul {
 }
 
 
-.audio-play-btn {
+.audio-play-btn-mobile {
   height: 10vh;
   width: 20%;
   font-size: 40px;
 }
 
-.audio-main-out{
+.audio-main-out-mobile {
   row-gap: 30px;
   height: 15vh;
   display: flex;
@@ -39,7 +39,7 @@ ul {
   flex-direction: column;
 }
 
-.audio-tracks-container {
+.audio-tracks-container-mobile {
   height: 40vh;
   display: flex;
   flex-direction: row;
@@ -47,13 +47,13 @@ ul {
   align-items: center;
 }
 
-.audio-vertical-range-container {
+.audio-vertical-range-container-mobile {
   border: solid black;
   transform: scale(3) rotate(270DEG);
   flex-basis: auto;
 }
 
-.audio-filter-label-row {
+.audio-filter-label-row-mobile {
   text-align: center;
   display: flex;
   font-size: 40px;
@@ -62,23 +62,23 @@ ul {
   height: 5vh;
 }
 
-.filter-toggle {
+.filter-toggle-mobile {
   display: flex;
   align-items: center;
   border: solid black;
   padding: 0 10px;
 }
 
-.audio-horizontal-range-container {
+.audio-horizontal-range-container-mobile {
   transform: scale(3) ;
   margin-top: 10px;
 }
 
-.filter-range {
+.filter-range-mobile {
   transform: scale(2.5)
 }
 
-.filter-range-reverse {
+.filter-range-reverse-mobile {
   transform: scale(2.5) rotate(180DEG);
   margin-bottom: 10px;
 }

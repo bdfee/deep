@@ -109,7 +109,51 @@ const Container = () => {
   }
   return (
     <>
-      <BrowserView>this is browser</BrowserView>
+      <BrowserView>
+        <div className="main-display row">
+          <Setup
+            showSection={showSection}
+            categories={categories}
+            setCategories={setCategories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            items={items}
+            setItems={setItems}
+            createEntry={createEntry}
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
+          />
+          <Audio isRunning={isRunning} showSection={showSection} />
+          <Session
+            items={items}
+            setItems={setItems}
+            showSection={showSection}
+            logSession={logSession}
+          />
+          <Log log={log} showSection={showSection} />
+          <Categories
+            showSection={showSection}
+            categories={categories}
+            setCategories={setCategories}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            items={items}
+            setItems={setItems}
+          />
+        </div>
+        <div className="start row">
+          <ActiveToggle
+            selectedCategory={selectedCategory}
+            isRunning={isRunning}
+            setIsRunning={setIsRunning}
+            setShowSection={setShowSection}
+            showSection={showSection}
+          />
+        </div>
+        <div className="row">
+          <DisplayToggle setShowSection={setShowSection} showSection={showSection} />
+        </div>
+      </BrowserView>
       <MobileView className="mobile-grid">
         <div className="main-display row">
           <Setup
