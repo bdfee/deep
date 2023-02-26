@@ -26,6 +26,7 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs, timeInMins, setTi
     <div className="timer-range-container">
       <input
         className="timer-range"
+        orient="horizontal"
         type="range"
         min={1}
         max={120}

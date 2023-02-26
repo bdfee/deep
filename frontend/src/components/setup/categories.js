@@ -10,7 +10,11 @@ const Categories = ({ categories, selectedCategory, setSelectedCategory }) => {
             key={id}
             value={id}
             name={name}
-            onClick={() => setSelectedCategory({ name, id, totalTime })}>
+            onClick={() =>
+              selectedCategory.id === id
+                ? setSelectedCategory('')
+                : setSelectedCategory({ name, id, totalTime })
+            }>
             {name}
           </button>
         )

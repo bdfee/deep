@@ -22,6 +22,7 @@ const MainOutControls = ({ gain, setGain, handleStart, handleStop, isActive, con
       <div className="audio-horizontal-range-container">
         <input
           value={gain}
+          orient="horizontal"
           type="range"
           min={0}
           max={1}

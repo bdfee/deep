@@ -1,4 +1,5 @@
 input[type="range"][orient="vert"] {
+  appearance: none;
   transform: rotate(0DEG);
   margin: 0 0 0 0;
   padding: 0 0 0 0;
@@ -6,9 +7,9 @@ input[type="range"][orient="vert"] {
   height: 11px;
 }
 
-input[type="range"]{
+input[type="range"][orient="horizontal"]{
   appearance: none;
-  margin: 0px;
+  border: solid;
 }
 
 ul {
@@ -17,16 +18,11 @@ ul {
   margin: 0;
 }
 
-/* .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 10px;
-  background-color: rgb(255, 120, 0);
-  overflow: visible;
-  cursor: pointer;
-} */
-/* audio */
+.main-display {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .audio-play-btn {
   height: 10vh;
@@ -57,13 +53,20 @@ ul {
   flex-basis: auto;
 }
 
-.audio-vertical-range-label {
+.audio-filter-label-row {
   text-align: center;
-    display: flex;
-    font-size: 40px;
-    justify-content: space-evenly;
-    align-content: center;
-    height: 5vh;
+  display: flex;
+  font-size: 40px;
+  justify-content: space-evenly;
+  align-content: center;
+  height: 5vh;
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  border: solid black;
+  padding: 0 10px;
 }
 
 .audio-horizontal-range-container {
@@ -77,7 +80,7 @@ ul {
 
 .filter-range-reverse {
   transform: scale(2.5) rotate(180DEG);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .audio-filter-controls {
@@ -123,10 +126,6 @@ ul {
   font-size: 2vh;
 }
 
-.category-display {
-  display: flex;
-  flex-direction: column;
-}
 .category-button {
   height: 10vh;
   font-size: 2vh;
@@ -214,7 +213,8 @@ ul {
   height: 5vh;
   width: 50%;
   margin: 0;
-  padding: 0;
+  padding-left: 10px;
+  font-size: 40px;
 }
 
 .category-create-row {

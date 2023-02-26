@@ -49,7 +49,7 @@ const Container = () => {
   const logSession = () => {
     const session = {
       id: tempId(),
-      date: new Date(),
+      date: new Date().toLocaleDateString(),
       items: items
     }
 
@@ -111,7 +111,7 @@ const Container = () => {
     <>
       <BrowserView>this is browser</BrowserView>
       <MobileView className="mobile-grid">
-        <div className="category-display row">
+        <div className="main-display row">
           <Setup
             showSection={showSection}
             categories={categories}
@@ -148,6 +148,7 @@ const Container = () => {
             isRunning={isRunning}
             setIsRunning={setIsRunning}
             setShowSection={setShowSection}
+            showSection={showSection}
           />
         </div>
         <div className="row">

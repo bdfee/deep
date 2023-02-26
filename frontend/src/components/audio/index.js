@@ -111,7 +111,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
           )
         })}
       </div>
-      <div className="audio-vertical-range-label">
+      <div className="audio-filter-label-row">
         {trackParams.map((params) => {
           return (
             <TracksFilterToggle

@@ -12,7 +12,7 @@ const Setup = ({
 }) => {
   const display = { display: showSection.length ? 'none' : 'block' }
   return (
-    <div style={display}>
+    <div style={display} className="setup">
       <Categories
         categories={categories}
         selectedCategory={selectedCategory}
