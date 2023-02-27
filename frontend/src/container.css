@@ -1,15 +1,22 @@
-input[type="range"][orient="vert"] {
+/* input[type="range"][orient="vert"] {
   appearance: none;
   transform: rotate(0DEG);
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   width: 160px;
-  height: 10px;
+  border: solid #AFABAB;
+  border-radius: 5px;
 }
 
 input[type="range"][orient="horizontal"]{
   appearance: none;
-  border: solid;
+  border: solid  #AFABAB;
+  border-radius: 5px;
+} */
+
+
+button {
+  cursor: pointer;
 }
 
 ul {
@@ -18,92 +25,26 @@ ul {
   margin: 0;
 }
 
+.label {
+ width: 3vw;
+}
+
 .main-display {
   display: flex;
   flex-direction: column;
 }
 
-
-.audio-play-btn {
-  height: 10vh;
-  width: 20%;
-  font-size: 3vh;
-}
-
-.audio-main-out{
-  row-gap: 30px;
-  height: 15vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-}
-
-.audio-tracks-container {
-  height: 40vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.audio-vertical-range-container {
-  border: solid black;
-  transform: scale(3) rotate(270DEG);
-  flex-basis: auto;
-}
-
-.audio-filter-label-row {
-  text-align: center;
-  display: flex;
-  font-size: 3vh;
-  justify-content: space-evenly;
-  align-content: center;
-  height: 5vh;
-}
-
-.filter-toggle {
-  display: flex;
-  align-items: center;
-  border: solid black;
-  padding: 0 10px;
-}
-
-.audio-horizontal-range-container {
-  transform: scale(3) ;
-  margin-top: 10px;
-}
-
-.filter-range {
-  transform: scale(2.5)
-}
-
-.filter-range-reverse {
-  transform: scale(2.5) rotate(180DEG);
-  margin-bottom: 10px;
-}
-
-.audio-filter-controls {
-  align-content: center;
-  justify-content: space-evenly;
-  min-height: 5vh;
-  align-items: center;
-}
-
-.mobile-grid {
+.grid {
   display: grid;
   grid-template-rows: 65vh 10vh 15vh;
   grid-template-columns:auto;
   padding: 5px;
 }
 
-.row {
-  border: 1px solid black;
-}
 
 .start-btn {
   height: 10vh;
-  width: 75%;
+  width: 100%;
   font-size: 2vh;
 }
 
@@ -134,7 +75,6 @@ ul {
 }
 
 .timer-setup {
-    row-gap: 30px;
     height: 15vh;
     display: flex;
     align-items: center;
@@ -148,7 +88,7 @@ ul {
   min-width: 30%
 }
 
-.timer-range-container {
+.timer-range-container-mobile {
   transform: scale(3)
 }
 

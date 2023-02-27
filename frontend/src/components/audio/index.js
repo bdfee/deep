@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
-import MainOutControls from './main-out-controls'
+import './index.css'
 
 import {
   createAudioNodes,
@@ -24,8 +24,6 @@ const audio = {
 
 const AudioParameters = ({ isRunning, showSection }) => {
   // state parameters of ui, values used to rebuild the audio object in handleStart and map the filter components
-  const [gain, setGain] = useState(0.5)
-  const [isActive, setIsActive] = useState(false)
   const [showFilter, setShowFilter] = useState('lowPink')
   const [trackParams, setTrackParams] = useState([
     {
@@ -68,7 +66,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
   }, [isRunning])
 
   const handleStart = () => {
-    audio.graph.out.gain.value = gain
+    audio.graph.out.gain.value = 0.8
     // map params from inital or user defined state into audio on start
     trackParams.map((params) => {
       const track = (audio.graph.tracks[params.id] = {})
@@ -78,13 +76,10 @@ const AudioParameters = ({ isRunning, showSection }) => {
       connectAudioNodes(track, audio.graph.out, audio.context.destination)
       track.audioSource.start()
     })
-
-    setIsActive(true)
   }
 
   const handleStop = () => {
     Object.values(audio.graph.tracks).map((track) => track.audioSource.stop())
-    setIsActive(false)
   }
 
   const tempStyle = {
@@ -94,59 +89,52 @@ const AudioParameters = ({ isRunning, showSection }) => {
 
   return (
     <div className="audio-controls" style={tempStyle}>
-      <div className="audio-tracks-container">
+      <div className="gain-sliders-container">
         {trackParams.map((params) => {
           return (
-            <div key={params.id}>
-              <TracksGain
-                showFilter={showFilter}
-                setShowFilter={setShowFilter}
-                params={params}
-                trackParams={trackParams}
-                setParams={setTrackParams}
-                trackNodes={audio.graph.tracks[params.id]}
-                context={audio.context}
-              />
-            </div>
-          )
-        })}
-      </div>
-      <div className="audio-filter-label-row">
-        {trackParams.map((params) => {
-          return (
-            <TracksFilterToggle
+            <TracksGain
               key={params.id}
               showFilter={showFilter}
               setShowFilter={setShowFilter}
               params={params}
-            />
-          )
-        })}
-      </div>
-      {trackParams.map((params) => {
-        return (
-          <div key={params.id}>
-            <TracksFilter
-              showFilter={showFilter}
-              params={params}
-              trackFilterDefaults={filterDefaults[params.id]}
               trackParams={trackParams}
               setParams={setTrackParams}
               trackNodes={audio.graph.tracks[params.id]}
               context={audio.context}
             />
-          </div>
-        )
-      })}
-      <MainOutControls
-        setGain={setGain}
-        gain={gain}
-        handleStart={handleStart}
-        handleStop={handleStop}
-        isActive={isActive}
-        context={audio.context}
-        out={audio.graph.out}
-      />
+          )
+        })}
+      </div>
+      <div className="filters">
+        <div className="filter-toggle-row">
+          {trackParams.map((params) => {
+            return (
+              <TracksFilterToggle
+                key={params.id}
+                showFilter={showFilter}
+                setShowFilter={setShowFilter}
+                params={params}
+              />
+            )
+          })}
+        </div>
+        <div>
+          {trackParams.map((params) => {
+            return (
+              <TracksFilter
+                key={params.id}
+                showFilter={showFilter}
+                params={params}
+                trackFilterDefaults={filterDefaults[params.id]}
+                trackParams={trackParams}
+                setParams={setTrackParams}
+                trackNodes={audio.graph.tracks[params.id]}
+                context={audio.context}
+              />
+            )
+          })}
+        </div>
+      </div>
     </div>
   )
 }

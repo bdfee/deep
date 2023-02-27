@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 
 const CountDown = ({ isActive, handleStopTimer, totalTimeInMs, timeInMins, setTimeInMins }) => {
   const countToMsRef = useRef()
@@ -22,8 +23,10 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs, timeInMins, setTi
     setTimeInMins(value)
   }
 
+  const mobileClass = isMobile ? '-mobile' : ''
+
   return (
-    <div className="timer-range-container">
+    <div className={`timer-range-container${mobileClass}`}>
       <input
         className="timer-range"
         orient="horizontal"

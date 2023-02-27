@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { BrowserView, MobileView } from 'react-device-detect'
 import Setup from './setup'
 import Audio from './audio/index'
 import Log from './log/index'
@@ -108,54 +107,51 @@ const Container = () => {
     }
   }
   return (
-    <>
-      <BrowserView>this is browser</BrowserView>
-      <MobileView className="mobile-grid">
-        <div className="main-display row">
-          <Setup
-            showSection={showSection}
-            categories={categories}
-            setCategories={setCategories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            items={items}
-            setItems={setItems}
-            createEntry={createEntry}
-            isRunning={isRunning}
-            setIsRunning={setIsRunning}
-          />
-          <Audio isRunning={isRunning} showSection={showSection} />
-          <Session
-            items={items}
-            setItems={setItems}
-            showSection={showSection}
-            logSession={logSession}
-          />
-          <Log log={log} showSection={showSection} />
-          <Categories
-            showSection={showSection}
-            categories={categories}
-            setCategories={setCategories}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            items={items}
-            setItems={setItems}
-          />
-        </div>
-        <div className="start row">
-          <ActiveToggle
-            selectedCategory={selectedCategory}
-            isRunning={isRunning}
-            setIsRunning={setIsRunning}
-            setShowSection={setShowSection}
-            showSection={showSection}
-          />
-        </div>
-        <div className="row">
-          <DisplayToggle setShowSection={setShowSection} showSection={showSection} />
-        </div>
-      </MobileView>
-    </>
+    <div className="grid">
+      <div className="main-display row">
+        <Setup
+          showSection={showSection}
+          categories={categories}
+          setCategories={setCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          items={items}
+          setItems={setItems}
+          createEntry={createEntry}
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+        />
+        <Audio isRunning={isRunning} showSection={showSection} />
+        <Session
+          items={items}
+          setItems={setItems}
+          showSection={showSection}
+          logSession={logSession}
+        />
+        <Log log={log} showSection={showSection} />
+        <Categories
+          showSection={showSection}
+          categories={categories}
+          setCategories={setCategories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          items={items}
+          setItems={setItems}
+        />
+      </div>
+      <div className="start row">
+        <ActiveToggle
+          selectedCategory={selectedCategory}
+          isRunning={isRunning}
+          setIsRunning={setIsRunning}
+          setShowSection={setShowSection}
+          showSection={showSection}
+        />
+      </div>
+      <div className="row">
+        <DisplayToggle setShowSection={setShowSection} showSection={showSection} />
+      </div>
+    </div>
   )
 }
 
