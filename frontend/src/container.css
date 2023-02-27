@@ -25,6 +25,12 @@ ul {
   margin: 0;
 }
 
+.swatch {
+  width: 5vh;
+  height: 5vh;
+  border: solid 1px black;
+}
+
 .label {
  width: 3vw;
 }
