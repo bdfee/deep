@@ -1,17 +1,13 @@
 const TracksFilterToggle = ({ showFilter, setShowFilter, params }) => {
   const { id } = params
 
-  const selectStyle = {
-    background: showFilter === id ? 'black' : 'transparent',
-    color: showFilter === id ? 'white' : 'black'
-  }
+  const selectedClass = showFilter === id ? `toggle-${id}` : ''
 
   return (
     <div
-      className="filter-toggle"
-      style={selectStyle}
+      className={`filter-toggle ${selectedClass}`}
       onClick={() => {
-        setShowFilter(showFilter === id ? '' : id)
+        setShowFilter(id)
       }}>
       {id}
     </div>

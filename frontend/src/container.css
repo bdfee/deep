@@ -4,12 +4,24 @@ input[type="range"][orient="vert"] {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   width: 160px;
-  height: 10px;
+  border: solid black;
 }
 
 input[type="range"][orient="horizontal"]{
   appearance: none;
-  border: solid;
+  border: solid black;
+}
+
+input {
+  cursor: grab;
+}
+
+input:active {
+  cursor: grabbing;
+}
+
+button {
+  cursor: pointer;
 }
 
 ul {
@@ -18,11 +30,26 @@ ul {
   margin: 0;
 }
 
+.label {
+ width: 3vw;
+}
+
 .main-display {
   display: flex;
   flex-direction: column;
 }
 
+.lowPink {
+  accent-color: red;
+}
+
+.midPink {
+  accent-color: green;
+}
+
+.highPink {
+  accent-color: yellow;
+}
 
 .audio-play-btn {
   height: 10vh;
@@ -30,26 +57,21 @@ ul {
   font-size: 3vh;
 }
 
-.audio-main-out{
-  row-gap: 30px;
-  height: 15vh;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-}
-
 .audio-tracks-container {
-  height: 40vh;
+  height: 45vh;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.audio-vertical-range-container {
-  border: solid black;
+.audio-vertical-range-container-mobile {
   transform: scale(3) rotate(270DEG);
+  flex-basis: auto;
+}
+
+.audio-vertical-range-container {
+  transform: rotate(270DEG);
   flex-basis: auto;
 }
 
@@ -66,7 +88,27 @@ ul {
   display: flex;
   align-items: center;
   border: solid black;
-  padding: 0 10px;
+  padding: 0 4vw;
+  cursor: pointer;
+  background: white;
+}
+
+.toggle-lowPink {
+  background: red;
+}
+
+.toggle-midPink {
+  background: green;
+}
+
+.toggle-highPink {
+  background: yellow;
+}
+
+.filters {
+  border: 1px solid black;
+  padding: 2vh 0;
+  background: gray;
 }
 
 .audio-horizontal-range-container {
@@ -74,23 +116,29 @@ ul {
   margin-top: 10px;
 }
 
-.filter-range {
+.filter-range-mobile {
   transform: scale(2.5)
 }
 
-.filter-range-reverse {
+.filter-range-reverse-mobile {
   transform: scale(2.5) rotate(180DEG);
   margin-bottom: 10px;
+}
+
+
+.filter-range-reverse {
+  transform: rotate(180DEG);
+  margin-bottom: 1vh;
 }
 
 .audio-filter-controls {
   align-content: center;
   justify-content: space-evenly;
-  min-height: 5vh;
+  padding-top: 2vh;
   align-items: center;
 }
 
-.mobile-grid {
+.grid {
   display: grid;
   grid-template-rows: 65vh 10vh 15vh;
   grid-template-columns:auto;
@@ -134,7 +182,6 @@ ul {
 }
 
 .timer-setup {
-    row-gap: 30px;
     height: 15vh;
     display: flex;
     align-items: center;
@@ -148,7 +195,7 @@ ul {
   min-width: 30%
 }
 
-.timer-range-container {
+.timer-range-container-mobile {
   transform: scale(3)
 }
 
