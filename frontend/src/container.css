@@ -4,16 +4,22 @@ input[type="range"][orient="vert"] {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   width: 160px;
-  border: solid black;
+  border: solid #AFABAB;
+  border-radius: 5px;
 }
 
 input[type="range"][orient="horizontal"]{
   appearance: none;
-  border: solid black;
+  border: solid  #AFABAB;
+  border-radius: 5px;
 }
 
 input {
   cursor: grab;
+}
+
+input:hover {
+  accent-color: black;
 }
 
 input:active {
@@ -40,15 +46,15 @@ ul {
 }
 
 .lowPink {
-  accent-color: red;
+  accent-color: #8F5C5B;
 }
 
 .midPink {
-  accent-color: green;
+  accent-color: #D48987;
 }
 
 .highPink {
-  accent-color: yellow;
+  accent-color: #ffc3c0;
 }
 
 .audio-play-btn {
@@ -87,26 +93,26 @@ ul {
 .filter-toggle {
   display: flex;
   align-items: center;
-  border: solid black;
+  border: solid #AFABAB;
   padding: 0 4vw;
   cursor: pointer;
   background: white;
 }
 
 .toggle-lowPink {
-  background: red;
+  background: #8F5C5B;
 }
 
 .toggle-midPink {
-  background: green;
+  background: #D48987;
 }
 
 .toggle-highPink {
-  background: yellow;
+  background: #ffc3c0;
 }
 
 .filters {
-  border: 1px solid black;
+  border: 1px solid #AFABAB;
   padding: 4vh 0;
   background: gray;
 }
