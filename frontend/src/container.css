@@ -1,4 +1,4 @@
-input[type="range"][orient="vert"] {
+/* input[type="range"][orient="vert"] {
   appearance: none;
   transform: rotate(0DEG);
   margin: 0 0 0 0;
@@ -12,19 +12,8 @@ input[type="range"][orient="horizontal"]{
   appearance: none;
   border: solid  #AFABAB;
   border-radius: 5px;
-}
+} */
 
-input {
-  cursor: grab;
-}
-
-input:hover {
-  accent-color: black;
-}
-
-input:active {
-  cursor: grabbing;
-}
 
 button {
   cursor: pointer;
@@ -45,105 +34,6 @@ ul {
   flex-direction: column;
 }
 
-.lowPink {
-  accent-color: #8F5C5B;
-}
-
-.midPink {
-  accent-color: #D48987;
-}
-
-.highPink {
-  accent-color: #ffc3c0;
-}
-
-.audio-play-btn {
-  height: 10vh;
-  width: 20%;
-  font-size: 3vh;
-}
-
-.audio-tracks-container {
-  height: 45vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.audio-vertical-range-container-mobile {
-  transform: scale(3) rotate(270DEG);
-  flex-basis: auto;
-}
-
-.audio-vertical-range-container {
-  transform: rotate(270DEG);
-  flex-basis: auto;
-}
-
-.audio-filter-label-row {
-  text-align: center;
-  display: flex;
-  font-size: 3vh;
-  justify-content: space-evenly;
-  align-content: center;
-  height: 5vh;
-}
-
-.filter-toggle {
-  display: flex;
-  align-items: center;
-  border: solid #AFABAB;
-  padding: 0 4vw;
-  cursor: pointer;
-  background: white;
-}
-
-.toggle-lowPink {
-  background: #8F5C5B;
-}
-
-.toggle-midPink {
-  background: #D48987;
-}
-
-.toggle-highPink {
-  background: #ffc3c0;
-}
-
-.filters {
-  border: 1px solid #AFABAB;
-  padding: 4vh 0;
-  background: gray;
-}
-
-.audio-horizontal-range-container {
-  transform: scale(3) ;
-  margin-top: 10px;
-}
-
-.filter-range-mobile {
-  transform: scale(2.5)
-}
-
-.filter-range-reverse-mobile {
-  transform: scale(2.5) rotate(180DEG);
-  margin-bottom: 10px;
-}
-
-
-.filter-range-reverse {
-  transform: rotate(180DEG);
-  margin-bottom: 1vh;
-}
-
-.audio-filter-controls {
-  align-content: center;
-  justify-content: space-evenly;
-  padding-top: 2vh;
-  align-items: center;
-}
-
 .grid {
   display: grid;
   grid-template-rows: 65vh 10vh 15vh;
@@ -151,9 +41,6 @@ ul {
   padding: 5px;
 }
 
-.row {
-  border: 1px solid black;
-}
 
 .start-btn {
   height: 10vh;

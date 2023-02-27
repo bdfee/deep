@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import TracksGain from './tracks-gain'
 import TracksFilter from './tracks-filter'
+import './index.css'
 
 import {
   createAudioNodes,
@@ -88,7 +89,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
 
   return (
     <div className="audio-controls" style={tempStyle}>
-      <div className="audio-tracks-container">
+      <div className="gain-sliders-container">
         {trackParams.map((params) => {
           return (
             <TracksGain
@@ -105,7 +106,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
         })}
       </div>
       <div className="filters">
-        <div className="audio-filter-label-row">
+        <div className="filter-toggle-row">
           {trackParams.map((params) => {
             return (
               <TracksFilterToggle
@@ -117,7 +118,7 @@ const AudioParameters = ({ isRunning, showSection }) => {
             )
           })}
         </div>
-        <div className="audio-filter-cutoff-row">
+        <div>
           {trackParams.map((params) => {
             return (
               <TracksFilter

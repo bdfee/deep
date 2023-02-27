@@ -33,7 +33,7 @@ const TracksGain = ({ params, trackParams, setParams, trackNodes, context }) => 
   const mobileClass = isMobile ? '-mobile' : ''
 
   return (
-    <div className={`audio-vertical-range-container${mobileClass} ${id}`} id={id}>
+    <div className={`gain-slider-container${mobileClass} ${id}`} id={id}>
       <input
         type="range"
         name={'gain'}

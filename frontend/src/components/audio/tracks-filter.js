@@ -52,9 +52,10 @@ const TracksFilter = ({
   const mobileClass = isMobile ? '-mobile' : ''
 
   return (
-    <div className="audio-filter-controls" style={display}>
-      <div className={`filter-range-reverse${mobileClass} ${id}`} id={id}>
+    <div className="filter-cutoff-sliders" style={display}>
+      <div className={`filter-reverse-slider-container${mobileClass} ${id}`} id={id}>
         <input
+          className={`filter-slider${mobileClass}`}
           orient="horizontal"
           min={min}
           name={'highpassFreq'}
@@ -66,8 +67,9 @@ const TracksFilter = ({
             handleSetParams(e)
           }}></input>
       </div>
-      <div className={`filter-range${mobileClass} ${id}`} id={id}>
+      <div className={`filter-slider-container${mobileClass} ${id}`} id={id}>
         <input
+          className={`filter-slider${mobileClass}`}
           min={min}
           max={max}
           orient="horizontal"
