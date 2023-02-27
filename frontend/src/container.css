@@ -4,7 +4,7 @@ input[type="range"][orient="vert"] {
   margin: 0 0 0 0;
   padding: 0 0 0 0;
   width: 160px;
-  height: 11px;
+  height: 10px;
 }
 
 input[type="range"][orient="horizontal"]{
@@ -27,7 +27,7 @@ ul {
 .audio-play-btn {
   height: 10vh;
   width: 20%;
-  font-size: 40px;
+  font-size: 3vh;
 }
 
 .audio-main-out{
@@ -56,7 +56,7 @@ ul {
 .audio-filter-label-row {
   text-align: center;
   display: flex;
-  font-size: 40px;
+  font-size: 3vh;
   justify-content: space-evenly;
   align-content: center;
   height: 5vh;
@@ -163,7 +163,7 @@ ul {
   align-items: center;
 }
 .entry {
-  font-size: 40px;
+  font-size: 3vh;
 }
 
 .entry-btn {
@@ -185,7 +185,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 40px;
+  font-size: 3vh;
   height: 5vh;
   border: solid 1px black;
 }
@@ -219,4 +219,5 @@ ul {
 
 .category-create-row {
   display: flex;
+  padding-top: 2vh;
 }
