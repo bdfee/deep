@@ -42,8 +42,6 @@ const Categories = ({
     })
   }
 
-  console.log(categories)
-
   const display = { display: showSection === 'categories' ? 'block' : 'none' }
   return (
     <div style={display}>
