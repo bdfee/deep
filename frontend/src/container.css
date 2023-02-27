@@ -107,7 +107,7 @@ ul {
 
 .filters {
   border: 1px solid black;
-  padding: 2vh 0;
+  padding: 4vh 0;
   background: gray;
 }
 
@@ -151,7 +151,7 @@ ul {
 
 .start-btn {
   height: 10vh;
-  width: 75%;
+  width: 100%;
   font-size: 2vh;
 }
 
