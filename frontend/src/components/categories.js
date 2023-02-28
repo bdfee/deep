@@ -12,11 +12,12 @@ const Categories = ({
   showSection
 }) => {
   const [text, setText] = useState('')
+  const [color, setColor] = useState('#000000')
 
   const createCategory = () => {
     const isCategoryExisting = categories.filter(({ name }) => name === text)
     if (!isCategoryExisting.length && text.length > 0) {
-      const newCategory = { name: text, id: tempId(), totalTime: 0 }
+      const newCategory = { name: text, id: tempId(), totalTime: 0, color: color }
       categoryService.create(newCategory).then((res) => {
         setCategories(categories.concat(res.data))
         setText('')
@@ -40,37 +41,39 @@ const Categories = ({
       }
     })
   }
-  const display = { display: showSection === 'categories' ? 'block' : 'none' }
 
+  const display = { display: showSection === 'categories' ? 'block' : 'none' }
   return (
     <div style={display}>
-      <div>
-        {categories.map(({ name, id, totalTime }) => {
-          return (
-            <div key={id} className="category">
-              <div className="category-name">
-                <b>{name}</b>
-              </div>
-              <div>{formatTime(totalTime)}</div>
-              <div className="category-remove">
-                {!totalTime ? (
-                  <button className="category-btn" onClick={() => removeCategory(id)}>
-                    remove
-                  </button>
-                ) : (
-                  ''
-                )}
-              </div>
+      {categories.map(({ name, id, totalTime, color }) => {
+        const swatchColor = { background: color }
+        return (
+          <div key={id} className="category">
+            <div className="swatch" style={swatchColor}></div>
+            <div className="category-name">
+              <b>{name}</b>
             </div>
-          )
-        })}
-      </div>
+            <div>{formatTime(totalTime)}</div>
+            <div className="category-remove">
+              {!totalTime ? (
+                <button className="category-btn" onClick={() => removeCategory(id)}>
+                  remove
+                </button>
+              ) : (
+                ''
+              )}
+            </div>
+          </div>
+        )
+      })}
+
       <div className="category-create-row">
         <input
           type="text"
           value={text}
           onChange={({ target }) => setText(target.value)}
           className="category-create-input"></input>
+        <input type="color" value={color} onChange={({ target }) => setColor(target.value)}></input>
         <button onClick={createCategory} className="category-create">
           create
         </button>

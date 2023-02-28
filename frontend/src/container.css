@@ -14,7 +14,14 @@ input[type="range"][orient="horizontal"]{
   border-radius: 5px;
 } */
 
+input[type="text"] {
+  cursor: default;
+}
 
+input[type="color"] {
+  cursor: default;
+  height: 6vh;
+}
 button {
   cursor: pointer;
 }
@@ -23,6 +30,12 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.swatch {
+  width: 5vh;
+  height: 5vh;
+  border: solid 1px black;
 }
 
 .label {
@@ -102,6 +115,7 @@ ul {
   align-content: flex-start;
   align-items: center;
 }
+
 .entry {
   font-size: 3vh;
 }
@@ -154,7 +168,7 @@ ul {
   width: 50%;
   margin: 0;
   padding-left: 10px;
-  font-size: 40px;
+  font-size: 4vh;
 }
 
 .category-create-row {

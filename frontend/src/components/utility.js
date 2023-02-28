@@ -1,5 +1,9 @@
 export const formatTime = (ms) => {
-  return new Date(ms).toISOString().slice(11, 22)
+  return new Date(ms)
+    .toISOString()
+    .slice(11, 22)
+    .split(':')
+    .map((increment) => (increment != '00' ? increment : ''))
 }
 
 export const createDateObjs = (entry) => {
