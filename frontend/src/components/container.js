@@ -106,9 +106,10 @@ const Container = () => {
       })
     }
   }
+
   return (
     <div className="grid">
-      <div className="main-display row">
+      <div className="main-display">
         <Setup
           showSection={showSection}
           categories={categories}
