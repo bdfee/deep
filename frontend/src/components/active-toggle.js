@@ -11,8 +11,11 @@ const ActiveToggle = ({
   }
 
   const style = { backgroundColor: 'black', color: 'white' }
-  const stopStyle = { backgroundColor: 'red', color: 'white' }
-  const startStyle = { backgroundColor: 'green', color: 'white' }
+  const stopStyle = { backgroundColor: selectedCategory.color, color: 'white' }
+  const startStyle = { backgroundColor: selectedCategory.color, color: 'white' }
+
+  console.log(selectedCategory)
+
   if (selectedCategory) {
     return (
       <button
@@ -28,7 +31,7 @@ const ActiveToggle = ({
         className="start-btn"
         onClick={() => setShowSection('')}
         style={showSection === '' ? style : null}>
-        select category
+        setup
       </button>
     )
   }

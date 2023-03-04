@@ -26,19 +26,17 @@ const CountDown = ({ isActive, handleStopTimer, totalTimeInMs, timeInMins, setTi
   const mobileClass = isMobile ? '-mobile' : ''
 
   return (
-    <div className={`timer-range-container${mobileClass}`}>
-      <input
-        className="timer-range"
-        orient="horizontal"
-        type="range"
-        min={1}
-        max={120}
-        step={1}
-        value={timeInMins}
-        onChange={({ target }) => {
-          handleSetTime(target.value)
-        }}></input>
-    </div>
+    <input
+      className={`timer-range-container${mobileClass}`}
+      orient="horizontal"
+      type="range"
+      min={1}
+      max={120}
+      step={1}
+      value={timeInMins}
+      onChange={({ target }) => {
+        handleSetTime(target.value)
+      }}></input>
   )
 }
 
