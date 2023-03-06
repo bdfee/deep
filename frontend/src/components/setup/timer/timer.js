@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 const Timer = ({ createEntry, isRunning, setIsRunning }) => {
   const [isActive, setIsActive] = useState(false)
   const [entryStartTime, setEntryStartTime] = useState({})
-  const [toggleCountDown, setToggleCountDown] = useState(false)
+  const [toggleCountDown, setToggleCountDown] = useState(true)
   const [timeInMins, setTimeInMins] = useState(1)
 
   useEffect(() => {
@@ -28,8 +28,6 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
     }
   }
 
-  console.log(toggleCountDown)
-
   return (
     <>
       {isActive ? (
@@ -41,7 +39,7 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
             <input type="checkbox" onClick={() => setToggleCountDown(!toggleCountDown)}></input>
             <span className="slider round"></span>
           </label>
-          {toggleCountDown ? (
+          {!toggleCountDown ? (
             <>
               <CountDown
                 isActive={isActive}
@@ -50,7 +48,7 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
                 timeInMins={timeInMins}
                 setTimeInMins={setTimeInMins}
               />
-              {`${timeInMins}m`}
+              `${timeInMins} ${timeInMins > 1 ? 'minutes' : 'minute'}`
             </>
           ) : (
             ''

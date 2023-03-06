@@ -14,8 +14,6 @@ const ActiveToggle = ({
   const stopStyle = { backgroundColor: selectedCategory.color, color: 'white' }
   const startStyle = { backgroundColor: selectedCategory.color, color: 'white' }
 
-  console.log(selectedCategory)
-
   if (selectedCategory) {
     return (
       <button
