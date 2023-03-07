@@ -34,7 +34,13 @@ const FloatingBarChart = ({ data }) => {
     // create x and y axes
     const xAxis = d3.axisBottom(xScale).ticks(24) // format hour labels on x axis
 
-    const yAxis = d3.axisLeft(yScale).ticks(7).tickFormat(d3.timeFormat('%a %d')) // format day labels on y axis
+    const yAxis = d3
+      .axisLeft(yScale)
+      .ticks(7)
+      .tickFormat(d3.timeFormat('%a %d'))
+      .tickSizeOuter(0) // remove outer ticks
+      .tickPadding(10) // add padding between tick labels and axis line
+      .tickSizeInner(-width)
 
     // render x and y axes
     svg
@@ -42,7 +48,12 @@ const FloatingBarChart = ({ data }) => {
       .attr('transform', `translate(${margin.left},${height + margin.top})`)
       .call(xAxis)
 
-    svg.select('.y-axis').attr('transform', `translate(${margin.left},${margin.top})`).call(yAxis)
+    svg
+      .select('.y-axis')
+      .attr('transform', `translate(${margin.left},${margin.top})`)
+      .call(yAxis)
+      .selectAll('.tick text, line')
+      .attr('transform', `translate(0, -5)`)
 
     console.log(timeToLinear('2023-03-05T13:34:54'))
     // render floating bars for each data point
