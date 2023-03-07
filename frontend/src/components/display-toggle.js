@@ -6,7 +6,7 @@ const DisplayToggle = ({ setShowSection, showSection }) => {
         className="display-toggle-btn"
         onClick={() => setShowSection(showSection === 'audio' ? '' : 'audio')}
         style={showSection === 'audio' ? style : null}>
-        audio
+        noise
       </button>
       <button
         className="display-toggle-btn"
@@ -24,7 +24,7 @@ const DisplayToggle = ({ setShowSection, showSection }) => {
         className="display-toggle-btn"
         onClick={() => setShowSection(showSection === 'categories' ? '' : 'categories')}
         style={showSection === 'categories' ? style : null}>
-        categories
+        projects
       </button>
     </div>
   )

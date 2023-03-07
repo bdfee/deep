@@ -1,5 +1,6 @@
 import Categories from './categories'
 import Timer from './timer'
+import './index.css'
 
 const Setup = ({
   categories,

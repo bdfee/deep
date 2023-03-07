@@ -52,13 +52,14 @@ ul {
   grid-template-rows: 65vh 10vh 15vh;
   grid-template-columns:auto;
   padding: 5px;
+  border: solid 1px gray;
 }
 
 
 .start-btn {
   height: 10vh;
   width: 100%;
-  font-size: 2vh;
+  font-size: 3vh;
 }
 
 .start {
@@ -77,44 +78,9 @@ ul {
 .display-toggle-btn {
   height: 15vh;
   width: 25%;
-  font-size: 2vh;
+  font-size: 3vh;
 }
 
-.category-button {
-  height: 10vh;
-  font-size: 2vh;
-  flex-grow: 1;
-  min-width: 30%;
-}
-
-.timer-setup {
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-}
-
-.timer-toggle {
-  height: 10vh;
-  font-size: 2vh;
-  min-width: 30%
-}
-
-.timer-range-container-mobile {
-  transform: scale(3)
-}
-
-
-.category-setup {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  height: 50vh;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  align-items: center;
-}
 
 .entry {
   font-size: 3vh;
