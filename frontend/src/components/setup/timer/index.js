@@ -28,8 +28,6 @@ const Timer = ({ createEntry, isRunning, setIsRunning }) => {
     }
   }
 
-  console.log(toggleCountDown)
-
   return (
     <>
       {isActive ? (
