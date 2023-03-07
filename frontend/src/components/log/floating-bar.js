@@ -67,6 +67,8 @@ const FloatingBarChart = ({ data }) => {
       .attr('height', height / 7.5)
       .attr('width', (d) => xScale(timeToLinear(d.end)) - xScale(timeToLinear(d.start)))
       .attr('fill', (d) => d.color)
+      .append('title') // add title element to each rect element
+      .text((d) => d.name) // set text content of title element
   }, [data])
 
   return (
